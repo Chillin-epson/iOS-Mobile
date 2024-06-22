@@ -7,23 +7,72 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024BB19C2C26ED2600FF8DB2 /* MotionResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BB19B2C26ED2600FF8DB2 /* MotionResultController.swift */; };
+		024BB19E2C26ED3200FF8DB2 /* MotionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BB19D2C26ED3200FF8DB2 /* MotionResultView.swift */; };
+		024BB1A32C26FB3E00FF8DB2 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1A22C26FB3E00FF8DB2 /* Gifu */; };
+		024BB1A62C26FB9200FF8DB2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1A52C26FB9200FF8DB2 /* SnapKit */; };
+		024BB1A92C26FBA400FF8DB2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1A82C26FBA400FF8DB2 /* Alamofire */; };
+		024BB1AC2C26FBBD00FF8DB2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1AB2C26FBBD00FF8DB2 /* Lottie */; };
+		024BB1AF2C26FBCA00FF8DB2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1AE2C26FBCA00FF8DB2 /* Kingfisher */; };
 		02577AF42C1C934000FA123D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577AF32C1C934000FA123D /* AppDelegate.swift */; };
 		02577AF62C1C934000FA123D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577AF52C1C934000FA123D /* SceneDelegate.swift */; };
-		02577AF82C1C934000FA123D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577AF72C1C934000FA123D /* ViewController.swift */; };
-		02577AFB2C1C934000FA123D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 02577AFA2C1C934000FA123D /* Base */; };
+		02577AF82C1C934000FA123D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577AF72C1C934000FA123D /* MainViewController.swift */; };
 		02577AFD2C1C934200FA123D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02577AFC2C1C934200FA123D /* Assets.xcassets */; };
 		02577B002C1C934200FA123D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 02577AFF2C1C934200FA123D /* Base */; };
+		02577B1D2C1C9E0900FA123D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B1C2C1C9E0900FA123D /* BaseViewController.swift */; };
+		02577B1F2C1C9E2200FA123D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B1E2C1C9E2200FA123D /* BaseView.swift */; };
+		02577B212C1C9ED800FA123D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B202C1C9ED800FA123D /* BaseCollectionViewCell.swift */; };
+		02577B232C1C9EEE00FA123D /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B222C1C9EEE00FA123D /* BaseTableViewCell.swift */; };
+		02577B252C1CA1EB00FA123D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B242C1CA1EB00FA123D /* MainView.swift */; };
+		02577B282C1CB8D900FA123D /* VoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B272C1CB8D900FA123D /* VoiceViewController.swift */; };
+		02577B2A2C1CC1B000FA123D /* VoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B292C1CC1B000FA123D /* VoiceView.swift */; };
+		02577B2E2C1CDB1800FA123D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B2D2C1CDB1800FA123D /* BottomSheetView.swift */; };
+		02577B332C1CDC1800FA123D /* Flow 6.json in Resources */ = {isa = PBXBuildFile; fileRef = 02577B322C1CDC1800FA123D /* Flow 6.json */; };
+		02577B352C1CDDCB00FA123D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B342C1CDDCB00FA123D /* LottieView.swift */; };
+		02654EE62C23BB2600A89E95 /* CreateDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02654EE52C23BB2600A89E95 /* CreateDrawingViewController.swift */; };
+		02654EE82C23BD0A00A89E95 /* CreateDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02654EE72C23BD0A00A89E95 /* CreateDrawingView.swift */; };
+		02CFC38A2C247FB500194B95 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC3892C247FB500194B95 /* ScanViewController.swift */; };
+		02CFC38C2C2482F500194B95 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC38B2C2482F500194B95 /* ScanView.swift */; };
+		02CFC38F2C2587D100194B95 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC38E2C2587D100194B95 /* CollectionViewCell.swift */; };
+		02CFC3912C259FAE00194B95 /* ScanCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC3902C259FAE00194B95 /* ScanCheckView.swift */; };
+		02CFC3932C25A07400194B95 /* ScanCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC3922C25A07400194B95 /* ScanCheckViewController.swift */; };
+		02CFC3972C25A3FC00194B95 /* MotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC3962C25A3FC00194B95 /* MotionViewController.swift */; };
+		02CFC3992C25A40800194B95 /* MotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC3982C25A40800194B95 /* MotionView.swift */; };
+		02CFC39E2C25A61300194B95 /* MotionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC39D2C25A61300194B95 /* MotionCheckViewController.swift */; };
+		02CFC3A02C25A63400194B95 /* MotionCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC39F2C25A63400194B95 /* MotionCheckView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		024BB19B2C26ED2600FF8DB2 /* MotionResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultController.swift; sourceTree = "<group>"; };
+		024BB19D2C26ED3200FF8DB2 /* MotionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultView.swift; sourceTree = "<group>"; };
 		02577AF02C1C934000FA123D /* EpsonChillin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpsonChillin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02577AF32C1C934000FA123D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02577AF52C1C934000FA123D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		02577AF72C1C934000FA123D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		02577AFA2C1C934000FA123D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		02577AF72C1C934000FA123D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		02577AFC2C1C934200FA123D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02577AFF2C1C934200FA123D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02577B012C1C934200FA123D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02577B1C2C1C9E0900FA123D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		02577B1E2C1C9E2200FA123D /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		02577B202C1C9ED800FA123D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		02577B222C1C9EEE00FA123D /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		02577B242C1CA1EB00FA123D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		02577B272C1CB8D900FA123D /* VoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceViewController.swift; sourceTree = "<group>"; };
+		02577B292C1CC1B000FA123D /* VoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceView.swift; sourceTree = "<group>"; };
+		02577B2D2C1CDB1800FA123D /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		02577B322C1CDC1800FA123D /* Flow 6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Flow 6.json"; sourceTree = "<group>"; };
+		02577B342C1CDDCB00FA123D /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		02654EE52C23BB2600A89E95 /* CreateDrawingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDrawingViewController.swift; sourceTree = "<group>"; };
+		02654EE72C23BD0A00A89E95 /* CreateDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDrawingView.swift; sourceTree = "<group>"; };
+		02CFC3892C247FB500194B95 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		02CFC38B2C2482F500194B95 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
+		02CFC38E2C2587D100194B95 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		02CFC3902C259FAE00194B95 /* ScanCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCheckView.swift; sourceTree = "<group>"; };
+		02CFC3922C25A07400194B95 /* ScanCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCheckViewController.swift; sourceTree = "<group>"; };
+		02CFC3962C25A3FC00194B95 /* MotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionViewController.swift; sourceTree = "<group>"; };
+		02CFC3982C25A40800194B95 /* MotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionView.swift; sourceTree = "<group>"; };
+		02CFC39D2C25A61300194B95 /* MotionCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCheckViewController.swift; sourceTree = "<group>"; };
+		02CFC39F2C25A63400194B95 /* MotionCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCheckView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +80,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024BB1A92C26FBA400FF8DB2 /* Alamofire in Frameworks */,
+				024BB1A32C26FB3E00FF8DB2 /* Gifu in Frameworks */,
+				024BB1A62C26FB9200FF8DB2 /* SnapKit in Frameworks */,
+				024BB1AC2C26FBBD00FF8DB2 /* Lottie in Frameworks */,
+				024BB1AF2C26FBCA00FF8DB2 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		024BB19A2C26ECFB00FF8DB2 /* MotionResult */ = {
+			isa = PBXGroup;
+			children = (
+				024BB19B2C26ED2600FF8DB2 /* MotionResultController.swift */,
+				024BB19D2C26ED3200FF8DB2 /* MotionResultView.swift */,
+			);
+			path = MotionResult;
+			sourceTree = "<group>";
+		};
 		02577AE72C1C934000FA123D = {
 			isa = PBXGroup;
 			children = (
@@ -58,13 +121,98 @@
 			children = (
 				02577AF32C1C934000FA123D /* AppDelegate.swift */,
 				02577AF52C1C934000FA123D /* SceneDelegate.swift */,
-				02577AF72C1C934000FA123D /* ViewController.swift */,
-				02577AF92C1C934000FA123D /* Main.storyboard */,
+				02577B1B2C1C9DEB00FA123D /* Base */,
+				02577B1A2C1C9DCA00FA123D /* Main */,
+				02577B262C1CB8BD00FA123D /* Voice */,
+				02654EE42C23BAC400A89E95 /* CreateDrawing */,
+				02CFC38D2C25562B00194B95 /* Scan */,
+				02CFC3942C25A2ED00194B95 /* ScanCheck */,
+				02CFC3952C25A33600194B95 /* Motion */,
+				02CFC39C2C25A5E700194B95 /* MotionCheck */,
+				024BB19A2C26ECFB00FF8DB2 /* MotionResult */,
 				02577AFC2C1C934200FA123D /* Assets.xcassets */,
 				02577AFE2C1C934200FA123D /* LaunchScreen.storyboard */,
 				02577B012C1C934200FA123D /* Info.plist */,
 			);
 			path = EpsonChillin;
+			sourceTree = "<group>";
+		};
+		02577B1A2C1C9DCA00FA123D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				02577AF72C1C934000FA123D /* MainViewController.swift */,
+				02577B242C1CA1EB00FA123D /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		02577B1B2C1C9DEB00FA123D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				02577B1C2C1C9E0900FA123D /* BaseViewController.swift */,
+				02577B1E2C1C9E2200FA123D /* BaseView.swift */,
+				02577B202C1C9ED800FA123D /* BaseCollectionViewCell.swift */,
+				02577B222C1C9EEE00FA123D /* BaseTableViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		02577B262C1CB8BD00FA123D /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				02577B272C1CB8D900FA123D /* VoiceViewController.swift */,
+				02577B292C1CC1B000FA123D /* VoiceView.swift */,
+				02577B2D2C1CDB1800FA123D /* BottomSheetView.swift */,
+				02577B342C1CDDCB00FA123D /* LottieView.swift */,
+				02577B322C1CDC1800FA123D /* Flow 6.json */,
+			);
+			path = Voice;
+			sourceTree = "<group>";
+		};
+		02654EE42C23BAC400A89E95 /* CreateDrawing */ = {
+			isa = PBXGroup;
+			children = (
+				02654EE52C23BB2600A89E95 /* CreateDrawingViewController.swift */,
+				02654EE72C23BD0A00A89E95 /* CreateDrawingView.swift */,
+			);
+			path = CreateDrawing;
+			sourceTree = "<group>";
+		};
+		02CFC38D2C25562B00194B95 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				02CFC3892C247FB500194B95 /* ScanViewController.swift */,
+				02CFC38B2C2482F500194B95 /* ScanView.swift */,
+				02CFC38E2C2587D100194B95 /* CollectionViewCell.swift */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		02CFC3942C25A2ED00194B95 /* ScanCheck */ = {
+			isa = PBXGroup;
+			children = (
+				02CFC3922C25A07400194B95 /* ScanCheckViewController.swift */,
+				02CFC3902C259FAE00194B95 /* ScanCheckView.swift */,
+			);
+			path = ScanCheck;
+			sourceTree = "<group>";
+		};
+		02CFC3952C25A33600194B95 /* Motion */ = {
+			isa = PBXGroup;
+			children = (
+				02CFC3962C25A3FC00194B95 /* MotionViewController.swift */,
+				02CFC3982C25A40800194B95 /* MotionView.swift */,
+			);
+			path = Motion;
+			sourceTree = "<group>";
+		};
+		02CFC39C2C25A5E700194B95 /* MotionCheck */ = {
+			isa = PBXGroup;
+			children = (
+				02CFC39D2C25A61300194B95 /* MotionCheckViewController.swift */,
+				02CFC39F2C25A63400194B95 /* MotionCheckView.swift */,
+			);
+			path = MotionCheck;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +231,13 @@
 			dependencies = (
 			);
 			name = EpsonChillin;
+			packageProductDependencies = (
+				024BB1A22C26FB3E00FF8DB2 /* Gifu */,
+				024BB1A52C26FB9200FF8DB2 /* SnapKit */,
+				024BB1A82C26FBA400FF8DB2 /* Alamofire */,
+				024BB1AB2C26FBBD00FF8DB2 /* Lottie */,
+				024BB1AE2C26FBCA00FF8DB2 /* Kingfisher */,
+			);
 			productName = EpsonChillin;
 			productReference = 02577AF02C1C934000FA123D /* EpsonChillin.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +266,13 @@
 				Base,
 			);
 			mainGroup = 02577AE72C1C934000FA123D;
+			packageReferences = (
+				024BB1A12C26FB3E00FF8DB2 /* XCRemoteSwiftPackageReference "Gifu" */,
+				024BB1A42C26FB9200FF8DB2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				024BB1A72C26FBA400FF8DB2 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				024BB1AA2C26FBBD00FF8DB2 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				024BB1AD2C26FBCA00FF8DB2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 02577AF12C1C934000FA123D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +289,7 @@
 			files = (
 				02577AFD2C1C934200FA123D /* Assets.xcassets in Resources */,
 				02577B002C1C934200FA123D /* Base in Resources */,
-				02577AFB2C1C934000FA123D /* Base in Resources */,
+				02577B332C1CDC1800FA123D /* Flow 6.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +300,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02577AF82C1C934000FA123D /* ViewController.swift in Sources */,
+				024BB19C2C26ED2600FF8DB2 /* MotionResultController.swift in Sources */,
+				02577AF82C1C934000FA123D /* MainViewController.swift in Sources */,
+				02CFC3992C25A40800194B95 /* MotionView.swift in Sources */,
+				02CFC3A02C25A63400194B95 /* MotionCheckView.swift in Sources */,
+				02577B252C1CA1EB00FA123D /* MainView.swift in Sources */,
+				02CFC3932C25A07400194B95 /* ScanCheckViewController.swift in Sources */,
+				024BB19E2C26ED3200FF8DB2 /* MotionResultView.swift in Sources */,
+				02CFC3912C259FAE00194B95 /* ScanCheckView.swift in Sources */,
+				02CFC38F2C2587D100194B95 /* CollectionViewCell.swift in Sources */,
+				02CFC38C2C2482F500194B95 /* ScanView.swift in Sources */,
+				02577B1D2C1C9E0900FA123D /* BaseViewController.swift in Sources */,
+				02577B1F2C1C9E2200FA123D /* BaseView.swift in Sources */,
+				02654EE62C23BB2600A89E95 /* CreateDrawingViewController.swift in Sources */,
 				02577AF42C1C934000FA123D /* AppDelegate.swift in Sources */,
+				02577B282C1CB8D900FA123D /* VoiceViewController.swift in Sources */,
+				02CFC38A2C247FB500194B95 /* ScanViewController.swift in Sources */,
+				02654EE82C23BD0A00A89E95 /* CreateDrawingView.swift in Sources */,
+				02577B232C1C9EEE00FA123D /* BaseTableViewCell.swift in Sources */,
+				02CFC39E2C25A61300194B95 /* MotionCheckViewController.swift in Sources */,
+				02CFC3972C25A3FC00194B95 /* MotionViewController.swift in Sources */,
+				02577B2A2C1CC1B000FA123D /* VoiceView.swift in Sources */,
+				02577B2E2C1CDB1800FA123D /* BottomSheetView.swift in Sources */,
 				02577AF62C1C934000FA123D /* SceneDelegate.swift in Sources */,
+				02577B212C1C9ED800FA123D /* BaseCollectionViewCell.swift in Sources */,
+				02577B352C1CDDCB00FA123D /* LottieView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		02577AF92C1C934000FA123D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				02577AFA2C1C934000FA123D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		02577AFE2C1C934200FA123D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,11 +471,15 @@
 				DEVELOPMENT_TEAM = DBXHWJCYZK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EpsonChillin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근을 허용합니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 입력하기 위해서는 마이크에 접근해야합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리에 접근을 허용합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성명령을 입력하는데 필요한 권한입니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +487,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = lavender.EpsonChillin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -323,11 +506,15 @@
 				DEVELOPMENT_TEAM = DBXHWJCYZK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EpsonChillin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근을 허용합니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 입력하기 위해서는 마이크에 접근해야합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리에 접근을 허용합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성명령을 입력하는데 필요한 권한입니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +522,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = lavender.EpsonChillin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -363,6 +553,77 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		024BB1A12C26FB3E00FF8DB2 /* XCRemoteSwiftPackageReference "Gifu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kaishin/Gifu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.2;
+			};
+		};
+		024BB1A42C26FB9200FF8DB2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		024BB1A72C26FBA400FF8DB2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		024BB1AA2C26FBBD00FF8DB2 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+		024BB1AD2C26FBCA00FF8DB2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		024BB1A22C26FB3E00FF8DB2 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 024BB1A12C26FB3E00FF8DB2 /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
+		};
+		024BB1A52C26FB9200FF8DB2 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 024BB1A42C26FB9200FF8DB2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		024BB1A82C26FBA400FF8DB2 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 024BB1A72C26FBA400FF8DB2 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		024BB1AB2C26FBBD00FF8DB2 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 024BB1AA2C26FBBD00FF8DB2 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		024BB1AE2C26FBCA00FF8DB2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 024BB1AD2C26FBCA00FF8DB2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02577AE82C1C934000FA123D /* Project object */;
 }

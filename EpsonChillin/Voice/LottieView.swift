@@ -24,3 +24,4 @@ struct LottieView: UIViewRepresentable {
         return animationView
     }
 }
+
