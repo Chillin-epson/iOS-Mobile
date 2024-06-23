@@ -98,7 +98,7 @@ class CreateDrawingViewController: BaseViewController {
         let confirmAction = UIAlertAction(title: "예", style: .default) { _ in
             self.createDrawingView.printToggleLoading(true)
             self.startProgressBar()
-            //self.printDrawing()
+            self.printDrawing()
             
             
         }

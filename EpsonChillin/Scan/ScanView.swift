@@ -9,29 +9,6 @@ import UIKit
 import SnapKit
 
 class ScanView: BaseView {
-//    lazy var scanImageButton: UIButton = {
-//        let button = UIButton()
-//        button.layer.cornerRadius = 10
-//        button.backgroundColor = .clear
-//        button.setTitle("스캔한 그림", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-//        button.layer.borderWidth = 2
-//        button.layer.borderColor = UIColor(.black).cgColor
-//        return button
-//    }()
-//    
-//    lazy var createImageButton: UIButton = {
-//        let button = UIButton()
-//        button.layer.cornerRadius = 10
-//        button.backgroundColor = .clear
-//        button.setTitle("생성한 도안", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-//        button.layer.borderWidth = 2
-//        button.layer.borderColor = UIColor(.black).cgColor
-//        return button
-//    }()
     
     lazy var voiceTitleLabel: UILabel = {
         let label = UILabel()
@@ -69,18 +46,6 @@ class ScanView: BaseView {
     }
     
     override func setConstraints() {
-//        scanImageButton.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(5)
-//            make.leading.equalToSuperview().inset(20)
-//            make.width.equalToSuperview().multipliedBy(0.45)
-//            make.height.equalTo(50)
-//        }
-//        createImageButton.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(5)
-//            make.trailing.equalToSuperview().inset(20)
-//            make.width.equalToSuperview().multipliedBy(0.45)
-//            make.height.equalTo(50)
-//        }
         voiceTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(10)
             make.leading.equalToSuperview().inset(20)
@@ -118,3 +83,39 @@ class ScanView: BaseView {
 }
 
 
+//    lazy var scanImageButton: UIButton = {
+//        let button = UIButton()
+//        button.layer.cornerRadius = 10
+//        button.backgroundColor = .clear
+//        button.setTitle("스캔한 그림", for: .normal)
+//        button.setTitleColor(.black, for: .normal)
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        button.layer.borderWidth = 2
+//        button.layer.borderColor = UIColor(.black).cgColor
+//        return button
+//    }()
+//
+//    lazy var createImageButton: UIButton = {
+//        let button = UIButton()
+//        button.layer.cornerRadius = 10
+//        button.backgroundColor = .clear
+//        button.setTitle("생성한 도안", for: .normal)
+//        button.setTitleColor(.black, for: .normal)
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        button.layer.borderWidth = 2
+//        button.layer.borderColor = UIColor(.black).cgColor
+//        return button
+//    }()
+
+//        scanImageButton.snp.makeConstraints { make in
+//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(5)
+//            make.leading.equalToSuperview().inset(20)
+//            make.width.equalToSuperview().multipliedBy(0.45)
+//            make.height.equalTo(50)
+//        }
+//        createImageButton.snp.makeConstraints { make in
+//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(5)
+//            make.trailing.equalToSuperview().inset(20)
+//            make.width.equalToSuperview().multipliedBy(0.45)
+//            make.height.equalTo(50)
+//        }
