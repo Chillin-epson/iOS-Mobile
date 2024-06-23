@@ -43,7 +43,7 @@ class MotionView: BaseView {
     
     override func setConstraints() {
         voiceTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(10)
             make.leading.equalToSuperview().inset(20)
         }
         voiceSubTitleLabel.snp.makeConstraints { make in

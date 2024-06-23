@@ -42,11 +42,6 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
     
     @objc func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
-        
-//        let mainVC = MainViewController()
-//        let mainNaviController = UINavigationController(rootViewController: mainVC)
-//        mainNaviController.modalPresentationStyle = .overFullScreen
-//        self.present(mainNaviController, animated: true, completion: nil)
     }
     
     override func configureView() {
@@ -58,7 +53,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         motionCheckView.jumpButton.addTarget(self, action: #selector(motionButtonTapped(_:)), for: .touchUpInside)
         motionCheckView.zombieButton.addTarget(self, action: #selector(motionButtonTapped(_:)), for: .touchUpInside)
     }
-    // MARK: - 모션 선택 버튼
+    
     @objc func motionButtonTapped(_ sender: UIButton) {
         let buttons = [motionCheckView.danceButton, motionCheckView.helloButton, motionCheckView.jumpButton, motionCheckView.zombieButton]
         buttons.forEach { button in
@@ -71,7 +66,8 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
                     motionSelected = "hello"
                 case motionCheckView.jumpButton:
                     motionSelected = "jump"
-                case motionCheckView.zombieButton: motionSelected = "zombie"
+                case motionCheckView.zombieButton:
+                    motionSelected = "zombie"
                 default:
                     break
                 }
@@ -80,7 +76,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
             }
         }
     }
-    // MARK: - 모션 생성 버튼
+    
     @objc func motionStartButtonTapped() {
         guard let drawing = drawing else { return }
         guard let motionSelected = motionSelected else {
@@ -97,7 +93,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
                 "motionType": motionSelected
             ]
             let headers: HTTPHeaders = ["Content-Type": "application/json"]
-
+            
             AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -118,14 +114,13 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
             }
         }
     }
-
+    
     func showAlert(message: String) {
         let alertController = UIAlertController(title: "확인", message: message, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(confirmAction)
         present(alertController, animated: true, completion: nil)
     }
-
     
     func presentMotionResultViewController(with gifUrl: URL) {
         let motionResultVC = MotionResultViewController()
@@ -136,7 +131,6 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         self.present(motionResultNaviController, animated: true, completion: nil)
     }
     
-    // MARK: - 카메라
     @objc func cameraButtonTapped() {
         presentCameraWithOverlay()
     }
@@ -152,64 +146,75 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
     func createOverlayView() -> UIView {
         let overlayView = UIView(frame: view.bounds)
         overlayView.backgroundColor = .clear
-        overlayView.isUserInteractionEnabled = false
+        overlayView.isUserInteractionEnabled = true
         
         let removeImageViewFrame = motionCheckView.convert(motionCheckView.removeImageView.frame, to: overlayView)
         let removeImageView = UIImageView(frame: removeImageViewFrame)
         removeImageView.image = motionCheckView.removeImageView.image
         removeImageView.contentMode = .scaleAspectFit
+        removeImageView.isUserInteractionEnabled = true
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        removeImageView.addGestureRecognizer(panGesture)
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        removeImageView.addGestureRecognizer(pinchGesture)
         
         overlayView.addSubview(removeImageView)
-        overlayView.backgroundColor = .clear
         
         return overlayView
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let originalImage = info[.originalImage] as? UIImage {
-            UIGraphicsBeginImageContextWithOptions(originalImage.size, false, originalImage.scale)
-            
-            originalImage.draw(in: CGRect(origin: .zero, size: originalImage.size))
-            
-            if let overlayImage = motionCheckView.removeImageView.image {
-                let overlayFrame = motionCheckView.removeImageView.frame
-                let imageSize = originalImage.size
-                let overlayOrigin = CGPoint(
-                    x: overlayFrame.origin.x * (imageSize.width / motionCheckView.bounds.width),
-                    y: overlayFrame.origin.y * (imageSize.height / motionCheckView.bounds.height)
-                )
-                let overlayAspect = overlayImage.size.width / overlayImage.size.height
-                let overlaySize: CGSize
-                if overlayFrame.size.width / overlayFrame.size.height > overlayAspect {
-                    overlaySize = CGSize(
-                        width: overlayFrame.size.height * overlayAspect * (imageSize.width / motionCheckView.bounds.width),
-                        height: overlayFrame.size.height * (imageSize.height / motionCheckView.bounds.height)
-                    )
-                } else {
-                    overlaySize = CGSize(
-                        width: overlayFrame.size.width * (imageSize.width / motionCheckView.bounds.width),
-                        height: overlayFrame.size.width / overlayAspect * (imageSize.height / motionCheckView.bounds.height)
-                    )
-                }
-                let overlayRect = CGRect(
-                    x: overlayOrigin.x + (overlayFrame.size.width * (imageSize.width / motionCheckView.bounds.width) - overlaySize.width) / 2,
-                    y: overlayOrigin.y + (overlayFrame.size.height * (imageSize.height / motionCheckView.bounds.height) - overlaySize.height) / 2,
-                    width: overlaySize.width,
-                    height: overlaySize.height
-                )
-                overlayImage.draw(in: overlayRect)
-            }
-            
-            let combinedImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            if let combinedImage = combinedImage {
-                UIImageWriteToSavedPhotosAlbum(combinedImage, nil, nil, nil)
-                
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        guard let view = gesture.view else { return }
+        let translation = gesture.translation(in: view.superview)
+        view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+        gesture.setTranslation(.zero, in: view.superview)
+    }
+    
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard let view = gesture.view else { return }
+        view.transform = view.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+        gesture.scale = 1.0
+    }
+    
+    func captureScreen() -> UIImage? {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                let rootView = window.rootViewController?.view
+                let topMargin: CGFloat = 0
+                let bottomMargin: CGFloat = 0
+                let screenHeight = UIScreen.main.bounds.height
+                let screenWidth = UIScreen.main.bounds.width
+                let rect = CGRect(x: 0, y: topMargin, width: screenWidth, height: screenHeight - topMargin - bottomMargin)
+                UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+                rootView?.drawHierarchy(in: rect, afterScreenUpdates: true)
+                let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                return capturedImage
             }
         }
+        return nil
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // 사진 찍은 후 오버레이된 이미지를 포함하여 스크린샷을 캡처
+        if let capturedImage = captureScreen() {
+            UIImageWriteToSavedPhotosAlbum(capturedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
         
+        // Dismiss the picker
         picker.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // Handle error
+            showAlert(message: "사진 저장에 실패했습니다: \(error.localizedDescription)")
+        } else {
+            // Handle success
+            showAlert(message: "사진이 성공적으로 저장되었습니다.")
+        }
     }
     
     func startProgressBar(completion: @escaping () -> Void) {
@@ -225,5 +230,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         }
     }
 }
+
+
 
 
