@@ -14,6 +14,7 @@
 		024BB1A92C26FBA400FF8DB2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1A82C26FBA400FF8DB2 /* Alamofire */; };
 		024BB1AC2C26FBBD00FF8DB2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1AB2C26FBBD00FF8DB2 /* Lottie */; };
 		024BB1AF2C26FBCA00FF8DB2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 024BB1AE2C26FBCA00FF8DB2 /* Kingfisher */; };
+		024BB1B12C28168D00FF8DB2 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BB1B02C28168D00FF8DB2 /* test.swift */; };
 		02577AF42C1C934000FA123D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577AF32C1C934000FA123D /* AppDelegate.swift */; };
 		02577AF62C1C934000FA123D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577AF52C1C934000FA123D /* SceneDelegate.swift */; };
 		02577AF82C1C934000FA123D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577AF72C1C934000FA123D /* MainViewController.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		024BB19B2C26ED2600FF8DB2 /* MotionResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultController.swift; sourceTree = "<group>"; };
 		024BB19D2C26ED3200FF8DB2 /* MotionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultView.swift; sourceTree = "<group>"; };
+		024BB1B02C28168D00FF8DB2 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		02577AF02C1C934000FA123D /* EpsonChillin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpsonChillin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02577AF32C1C934000FA123D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02577AF52C1C934000FA123D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			children = (
 				02CFC39D2C25A61300194B95 /* MotionCheckViewController.swift */,
 				02CFC39F2C25A63400194B95 /* MotionCheckView.swift */,
+				024BB1B02C28168D00FF8DB2 /* test.swift */,
 			);
 			path = MotionCheck;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				024BB19C2C26ED2600FF8DB2 /* MotionResultController.swift in Sources */,
 				02577AF82C1C934000FA123D /* MainViewController.swift in Sources */,
 				02CFC3992C25A40800194B95 /* MotionView.swift in Sources */,
+				024BB1B12C28168D00FF8DB2 /* test.swift in Sources */,
 				02CFC3A02C25A63400194B95 /* MotionCheckView.swift in Sources */,
 				02577B252C1CA1EB00FA123D /* MainView.swift in Sources */,
 				02CFC3932C25A07400194B95 /* ScanCheckViewController.swift in Sources */,

@@ -3,7 +3,7 @@
 //  EpsonChillin
 //
 //  Created by 이승현 on 6/21/24.
-//
+
 import UIKit
 import Vision
 import AVFoundation
@@ -15,7 +15,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
     
     let motionCheckView = MotionCheckView()
     var drawing: Drawing?
-    var motionSelected: String?
+    var motionSelected: String? = "dance"
     
     override func loadView() {
         self.view = motionCheckView
@@ -42,6 +42,11 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
     
     @objc func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
+        
+//        let mainVC = MainViewController()
+//        let mainNaviController = UINavigationController(rootViewController: mainVC)
+//        mainNaviController.modalPresentationStyle = .overFullScreen
+//        self.present(mainNaviController, animated: true, completion: nil)
     }
     
     override func configureView() {
@@ -96,20 +101,30 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
             AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    print("value: \(value)")
                     if let json = value as? [String: Any], let gifUrlString = json["url"] as? String, let gifUrl = URL(string: gifUrlString) {
                         self.presentMotionResultViewController(with: gifUrl)
+                        self.motionCheckView.motionViewHidden(false)
                     } else {
                         print("Invalid response data")
                         self.motionCheckView.motionViewHidden(false)
+                        self.showAlert(message: "해당 그림은 움직이게 할 수 없습니다! 확인")
                     }
                 case .failure(let error):
                     print("Error: \(error)")
                     self.motionCheckView.motionViewHidden(false)
+                    self.showAlert(message: "해당 그림은 움직이게 할 수 없습니다!")
                 }
             }
         }
     }
 
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "확인", message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true, completion: nil)
+    }
 
     
     func presentMotionResultViewController(with gifUrl: URL) {
@@ -190,6 +205,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
             
             if let combinedImage = combinedImage {
                 UIImageWriteToSavedPhotosAlbum(combinedImage, nil, nil, nil)
+                
             }
         }
         
@@ -199,14 +215,15 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
     func startProgressBar(completion: @escaping () -> Void) {
         var progress: Float = 0.0
         motionCheckView.setProgress(progress)
-        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             progress += 0.05
             self.motionCheckView.setProgress(progress)
-            if progress >= 1.0 {
+            if progress >= 3.0 {
                 timer.invalidate()
                 completion()
             }
         }
     }
 }
+
 

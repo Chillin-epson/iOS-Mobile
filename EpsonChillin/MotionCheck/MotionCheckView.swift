@@ -44,7 +44,7 @@ class MotionCheckView: BaseView {
     
     lazy var removeImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         //imageView.backgroundColor = .clear
@@ -157,9 +157,9 @@ class MotionCheckView: BaseView {
             make.height.equalTo(60)
         }
         removeImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().inset(10)
-            make.width.height.equalTo(200)
+            make.centerY.equalToSuperview().offset(50)
+            make.leading.equalToSuperview().inset(0)
+            make.width.equalToSuperview().multipliedBy(0.7)
         }
         loadingImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -200,3 +200,11 @@ class MotionCheckView: BaseView {
     
     
 }
+
+
+
+//        removeImageView.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.leading.equalToSuperview().inset(10)
+//            make.width.height.equalTo(200)
+//        }
