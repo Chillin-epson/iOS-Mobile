@@ -60,21 +60,21 @@ class MainView: BaseView {
         }
         
         topCardImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabelView.snp.bottom).offset(20)
+            make.top.equalTo(titleLabelView.snp.bottom).offset(10)
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(20)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(20)
             make.height.equalTo(248)
         }
         
         mediumCardImageView.snp.makeConstraints { make in
-            make.top.equalTo(topCardImageView.snp.bottom).offset(20)
+            make.top.equalTo(topCardImageView.snp.bottom).offset(10)
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(20)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(20)
             make.height.equalTo(180)
         }
         
         lowCardImageView.snp.makeConstraints { make in
-            make.top.equalTo(mediumCardImageView.snp.bottom).offset(20)
+            make.top.equalTo(mediumCardImageView.snp.bottom).offset(10)
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(20)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(20)
             make.height.equalTo(180)

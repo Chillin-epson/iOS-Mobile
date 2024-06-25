@@ -12,7 +12,7 @@ class ScanView: BaseView {
     
     lazy var voiceTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "스캔한 그림을 볼 수 있어요!"
+        label.text = "생성한 그림을 볼 수 있어요!"
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .left
         return label
@@ -71,13 +71,30 @@ class ScanView: BaseView {
         let totalSpacing: CGFloat = (itemsPerRow - 1) * itemSpacing + padding * 2
         let itemWidth = (UIScreen.main.bounds.width - totalSpacing) / itemsPerRow
         
-        layout.itemSize = CGSize(width: 190, height: 270)
+        layout.itemSize = CGSize(width: 170, height: 270)
         layout.minimumInteritemSpacing = itemSpacing
         layout.minimumLineSpacing = itemSpacing
         layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         
         return layout
     }
+//    private func collectionViewLayout() -> UICollectionViewFlowLayout {
+//        let layout = UICollectionViewFlowLayout()
+//        
+//        let padding: CGFloat = 20
+//        let itemsPerRow: CGFloat = 2
+//        let itemSpacing: CGFloat = 10
+//        let totalSpacing: CGFloat = (itemsPerRow - 1) * itemSpacing + padding * 2
+//        let itemWidth = (UIScreen.main.bounds.width - totalSpacing) / itemsPerRow
+//        
+//        layout.itemSize = CGSize(width: itemWidth, height: 270)
+//        layout.minimumInteritemSpacing = itemSpacing
+//        layout.minimumLineSpacing = itemSpacing
+//        layout.sectionInset = UIEdgeInsets(top: 20, left: padding, bottom: 20, right: padding)
+//        
+//        return layout
+//    }
+
 
     
 }

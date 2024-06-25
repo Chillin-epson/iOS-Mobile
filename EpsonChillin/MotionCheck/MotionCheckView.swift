@@ -15,7 +15,8 @@ class MotionCheckView: BaseView {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(color: .white, size: CGSize(width: 1, height: 1))
+        imageView.backgroundColor = .clear
+        imageView.image = UIImage(color: .clear, size: CGSize(width: 1, height: 1))
         return imageView
     }()
     
@@ -47,11 +48,13 @@ class MotionCheckView: BaseView {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
-        //imageView.backgroundColor = .clear
-        imageView.image = UIImage(color: .white, size: CGSize(width: 1, height: 1))
+        imageView.contentMode = .scaleToFill
+        imageView.backgroundColor = .clear
+        imageView.image = UIImage(color: .clear, size: CGSize(width: 1, height: 1))
         imageView.isHidden = true
         return imageView
     }()
+    
     lazy var danceButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -159,7 +162,8 @@ class MotionCheckView: BaseView {
         removeImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview().offset(50)
             make.leading.equalToSuperview().inset(0)
-            make.width.equalToSuperview().multipliedBy(0.7)
+            make.height.equalTo(200)
+            make.width.equalTo(150)
         }
         loadingImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -201,10 +205,3 @@ class MotionCheckView: BaseView {
     
 }
 
-
-
-//        removeImageView.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
-//            make.leading.equalToSuperview().inset(10)
-//            make.width.height.equalTo(200)
-//        }
