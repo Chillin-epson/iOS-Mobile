@@ -27,7 +27,7 @@ class MotionResultViewController: BaseViewController {
         backButton.tintColor = .gray
         navigationItem.leftBarButtonItem = backButton
         
-        view.backgroundColor = UIColor(named: "MainBackGroundColor")
+        //view.backgroundColor = UIColor(named: "MainBackGroundColor")
         
         if let gifUrl = gifUrl {
             loadGIF(from: gifUrl)

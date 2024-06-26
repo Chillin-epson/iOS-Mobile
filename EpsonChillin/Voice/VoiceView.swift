@@ -12,7 +12,14 @@ import Lottie
 
 class VoiceView: BaseView, UITextViewDelegate {
     
-    let placeholderText = "색칠하고 싶은 그림을 말로 \n표현해보세요!"
+    lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "배경")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    let placeholderText = "색칠하고 싶은 그림을 \n말로 표현해보세요!"
     
     lazy var voiceTitleLabel: UILabel = {
         let label = UILabel()
@@ -37,7 +44,7 @@ class VoiceView: BaseView, UITextViewDelegate {
         textView.textColor = UIColor.lightGray
         textView.isEditable = true
         textView.backgroundColor = .white
-        textView.text = placeholderText
+        textView.attributedText = placeholderAttributedText()
         textView.layer.cornerRadius = 15
         textView.textContainerInset = UIEdgeInsets(top: 30, left: 20, bottom: 20, right: 20)
         textView.delegate = self
@@ -88,6 +95,7 @@ class VoiceView: BaseView, UITextViewDelegate {
     }()
     
     override func configureView() {
+        addSubview(backgroundImageView)
         addSubview(voiceTitleLabel)
         addSubview(voiceSubTitleLabel)
         addSubview(textView)
@@ -95,9 +103,14 @@ class VoiceView: BaseView, UITextViewDelegate {
         addSubview(drawingButton)
         addSubview(loadingImageView)
         addSubview(progressBar)
+        
+        sendSubviewToBack(backgroundImageView)
     }
     
     override func setConstraints() {
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         voiceTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalToSuperview().inset(20)
@@ -143,30 +156,42 @@ class VoiceView: BaseView, UITextViewDelegate {
         }
     }
     
+    func placeholderAttributedText() -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10 // 행간 간격 설정
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 30),
+            .foregroundColor: UIColor.lightGray,
+            .paragraphStyle: paragraphStyle
+        ]
+        
+        return NSAttributedString(string: placeholderText, attributes: attributes)
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == placeholderText {
-            textView.text = ""
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
             textView.textColor = .black
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = placeholderText
-            textView.textColor = .lightGray
+            textView.attributedText = placeholderAttributedText()
         }
     }
     
     func removePlaceholder() {
-        if textView.text == placeholderText {
+        if textView.textColor == UIColor.lightGray {
             textView.text = ""
             textView.textColor = .black
         }
     }
+    
     func setPlaceholder() {
         if textView.text.isEmpty {
-            textView.text = placeholderText
-            textView.textColor = .lightGray
+            textView.attributedText = placeholderAttributedText()
         }
     }
     
@@ -183,7 +208,7 @@ class VoiceView: BaseView, UITextViewDelegate {
     func setProgress(_ progress: Float) {
         progressBar.setProgress(progress, animated: true)
     }
-    
 }
+
 
 

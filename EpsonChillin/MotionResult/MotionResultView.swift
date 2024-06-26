@@ -10,7 +10,13 @@ import SnapKit
 import Gifu
 
 class MotionResultView: BaseView {
-
+    
+    lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "배경")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
     lazy var gifImageView: GIFImageView = {
         let imageView = GIFImageView()
         imageView.contentMode = .scaleAspectFill
@@ -33,11 +39,16 @@ class MotionResultView: BaseView {
     }()
     
     override func configureView() {
+        addSubview(backgroundImageView)
         addSubview(gifImageView)
         addSubview(saveGifButton)
+        sendSubviewToBack(backgroundImageView)
     }
     
     override func setConstraints() {
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         gifImageView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(40)
             make.left.right.equalToSuperview().inset(20)
@@ -49,6 +60,7 @@ class MotionResultView: BaseView {
             make.right.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }
+        
     }
     
 }

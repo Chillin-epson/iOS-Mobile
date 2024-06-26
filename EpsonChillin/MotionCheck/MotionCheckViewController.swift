@@ -25,7 +25,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "MainBackGroundColor")
+        //view.backgroundColor = UIColor(named: "MainBackGroundColor")
         
         if let drawing = drawing, let url = URL(string: drawing.url) {
             motionCheckView.resultImageView.kf.setImage(with: url)
@@ -88,17 +88,17 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         print("drawingId: \(drawing.drawingId)")
         
         motionCheckView.motionViewHidden(true)
-        startProgressBar {
+        startProgressBar()
             let url = "https://api.zionhann.shop/app/chillin/motion/\(drawing.drawingId)"
             let parameters: [String: Any] = [
                 "motionType": motionSelected
             ]
             let headers: HTTPHeaders = ["Content-Type": "application/json"]
-            
+            print("888888")
             AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print("value: \(value)")
+                    print("value999: \(value)")
                     if let json = value as? [String: Any], let gifUrlString = json["url"] as? String, let gifUrl = URL(string: gifUrlString) {
                         self.presentMotionResultViewController(with: gifUrl)
                         self.motionCheckView.motionViewHidden(false)
@@ -113,7 +113,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
                     self.showAlert(message: "해당 그림은 움직이게 할 수 없습니다!")
                 }
             }
-        }
+        
     }
     
     func showAlert(message: String) {
@@ -154,7 +154,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         let cameraAspectRatio: CGFloat = 4.0 / 3.0
         let cameraHeight = screenBounds.width * cameraAspectRatio
         let scale = screenBounds.height / cameraHeight
-        cameraVC.cameraViewTransform = CGAffineTransform(translationX: 0, y: 80).scaledBy(x: scale, y: scale)
+        cameraVC.cameraViewTransform = CGAffineTransform(translationX: 0, y: 65).scaledBy(x: scale, y: scale)
         
         present(cameraVC, animated: true, completion: nil)
     }
@@ -185,24 +185,31 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         let buttonMargin: CGFloat = 20
         
         let shutterButton = UIButton(frame: CGRect(x: (view.bounds.width - buttonHeight) / 2, y: view.bounds.height - buttonHeight - buttonMargin, width: buttonHeight, height: buttonHeight))
-        shutterButton.backgroundColor = .red
+        shutterButton.backgroundColor = .white
+        shutterButton.tintColor = .black
+        shutterButton.setImage(UIImage(systemName: "camera.fill"), for: .normal)
         shutterButton.layer.cornerRadius = buttonHeight / 2
         shutterButton.addTarget(self, action: #selector(shutterButtonTapped), for: .touchUpInside)
         overlayView.addSubview(shutterButton)
         
         // 카메라 전환 버튼 추가 (오른쪽 하단)
         let switchCameraButton = UIButton(frame: CGRect(x: view.bounds.width - buttonHeight - buttonMargin, y: view.bounds.height - buttonHeight - buttonMargin, width: buttonHeight, height: buttonHeight))
-        switchCameraButton.backgroundColor = .blue
+        switchCameraButton.backgroundColor = .darkGray
+        switchCameraButton.setImage(UIImage(systemName: "arrow.triangle.2.circlepath"), for: .normal)
+        switchCameraButton.tintColor = .white
+        switchCameraButton.imageView?.contentMode = .scaleAspectFill
         switchCameraButton.layer.cornerRadius = buttonHeight / 2
-        switchCameraButton.setTitle("Flip", for: .normal)
+        //switchCameraButton.setTitle("Flip", for: .normal)
         switchCameraButton.addTarget(self, action: #selector(switchCameraButtonTapped), for: .touchUpInside)
         overlayView.addSubview(switchCameraButton)
         
         // 사용자 정의 취소 버튼 추가 (왼쪽 하단)
         let cancelButton = UIButton(frame: CGRect(x: buttonMargin, y: view.bounds.height - buttonHeight - buttonMargin, width: buttonHeight, height: buttonHeight))
-        cancelButton.backgroundColor = .gray
+        cancelButton.backgroundColor = .darkGray
+        cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancelButton.layer.cornerRadius = buttonHeight / 2
-        cancelButton.setTitle("Cancel", for: .normal)
+        //cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.tintColor = .white
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         overlayView.addSubview(cancelButton)
         
@@ -258,18 +265,22 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         }
     }
     
-    func startProgressBar(completion: @escaping () -> Void) {
+    func startProgressBar() {
         var progress: Float = 0.0
         motionCheckView.setProgress(progress)
+        let duration: Float = 40.0
+        let increment = 1.0 / duration
+
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            progress += 0.05
+            progress += increment
             self.motionCheckView.setProgress(progress)
-            if progress >= 3.0 {
+            if progress >= 1.0 {
                 timer.invalidate()
-                completion()
+                self.motionCheckView.motionViewHidden(false)
             }
         }
     }
+
     
     // 새로운 메서드 추가
     func takeSnapshotWithOverlayAndSave(capturedImage: UIImage) {

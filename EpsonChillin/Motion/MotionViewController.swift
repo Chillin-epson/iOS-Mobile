@@ -26,7 +26,7 @@ class MotionViewController: BaseViewController {
         backButton.tintColor = .gray
         navigationItem.leftBarButtonItem = backButton
         
-        view?.backgroundColor = UIColor(named: "MainBackGroundColor")
+        //view?.backgroundColor = UIColor(named: "MainBackGroundColor")
         motionView.collectionView.delegate = self
         motionView.collectionView.dataSource = self
         

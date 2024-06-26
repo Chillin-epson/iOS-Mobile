@@ -32,7 +32,7 @@ class VoiceViewController: BaseViewController, SFSpeechRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "MainBackGroundColor")
+        //view.backgroundColor = UIColor(named: "MainBackGroundColor")
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(closeButtonTapped))
         backButton.tintColor = .gray
@@ -203,6 +203,7 @@ class VoiceViewController: BaseViewController, SFSpeechRecognizerDelegate {
         AF.request("https://api.zionhann.shop/app/chillin/drawings/gen", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON { response in
             switch response.result {
             case .success(let value):
+                print("Generate Drawing Success: \(value)")
                 if let json = value as? [String: Any],
                    let drawingId = json["drawingId"] as? Int,
                    let urlString = json["url"] as? String,
@@ -220,6 +221,7 @@ class VoiceViewController: BaseViewController, SFSpeechRecognizerDelegate {
                     
                 }
             case .failure(let error):
+                
                 print("Error: \(error)")
             }
         }
@@ -228,16 +230,21 @@ class VoiceViewController: BaseViewController, SFSpeechRecognizerDelegate {
     func startProgressBar() {
         var progress: Float = 0.0
         voiceView.setProgress(progress)
+        let duration: Float = 20.0
+        let increment = 1.0 / duration
+
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            progress += 0.05
+            progress += increment
             self.voiceView.setProgress(progress)
-            if progress >= 3.0 {
+            if progress >= 1.0 {
                 timer.invalidate()
                 self.voiceView.toggleLoading(false)
             }
         }
     }
 }
+
+
 
 
 

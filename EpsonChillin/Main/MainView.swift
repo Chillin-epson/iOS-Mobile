@@ -11,6 +11,13 @@ import SnapKit
 
 class MainView: BaseView {
     
+    lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "배경")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     lazy var titleLabelView: UILabel = {
         let label = UILabel()
         label.text = "오늘은 어떤 그림을 \n그려볼까요? 🎨"
@@ -44,15 +51,20 @@ class MainView: BaseView {
     }()
     
     override func configureView() {
+        addSubview(backgroundImageView)
         addSubview(titleLabelView)
         addSubview(topCardImageView)
         addSubview(mediumCardImageView)
         addSubview(lowCardImageView)
-        
+        // 배경 이미지가 다른 뷰들 아래에 위치하도록 설정
+        sendSubviewToBack(backgroundImageView)
     }
-
+    
     
     override func setConstraints() {
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         titleLabelView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(0)
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(20)
@@ -72,7 +84,6 @@ class MainView: BaseView {
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(20)
             make.height.equalTo(180)
         }
-        
         lowCardImageView.snp.makeConstraints { make in
             make.top.equalTo(mediumCardImageView.snp.bottom).offset(10)
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(20)

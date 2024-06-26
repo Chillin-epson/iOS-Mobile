@@ -8,6 +8,21 @@ import UIKit
 import SnapKit
 
 class CreateDrawingView: BaseView {
+
+    lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "배경")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    lazy var a4PageImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage()
+        imageView.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -19,13 +34,31 @@ class CreateDrawingView: BaseView {
     
     lazy var resultImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         imageView.image = UIImage(color: .white, size: CGSize(width: 1, height: 1))
+        imageView.isHidden = false
         return imageView
     }()
-    
+    lazy var resultMediumImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.image = UIImage(color: .white, size: CGSize(width: 1, height: 1))
+        imageView.isHidden = true
+        return imageView
+    }()
+    lazy var resultSmallImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.image = UIImage(color: .white, size: CGSize(width: 1, height: 1))
+        imageView.isHidden = true
+        return imageView
+    }()
     lazy var redrawingButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -66,7 +99,7 @@ class CreateDrawingView: BaseView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
-        button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -77,7 +110,7 @@ class CreateDrawingView: BaseView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
-        button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -88,7 +121,7 @@ class CreateDrawingView: BaseView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
-        button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -122,6 +155,10 @@ class CreateDrawingView: BaseView {
     }()
     
     override func configureView() {
+        addSubview(backgroundImageView)
+        addSubview(a4PageImageView)
+        addSubview(resultMediumImageView)
+        addSubview(resultSmallImageView)
         addSubview(titleLabel)
         addSubview(resultImageView)
         addSubview(redrawingButton)
@@ -133,19 +170,38 @@ class CreateDrawingView: BaseView {
         addSubview(sizePrintButton)
         addSubview(loadingImageView)
         addSubview(progressBar)
+        sendSubviewToBack(backgroundImageView)
     }
     
     override func setConstraints() {
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            
+        }
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(10)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(0)
             make.height.equalTo(68)
             make.left.equalToSuperview().offset(20)
+        }
+        a4PageImageView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(20)
+            make.height.equalTo(500)
         }
         resultImageView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(20)
-            make.right.equalToSuperview().inset(20)
             make.height.equalTo(500)
+        }
+        resultMediumImageView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(50)
+            make.height.equalTo(375)
+        }
+        resultSmallImageView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(80)
+            make.height.equalTo(250)
         }
         redrawingButton.snp.makeConstraints { make in
             make.top.equalTo(resultImageView.snp.bottom).offset(20)
@@ -165,24 +221,26 @@ class CreateDrawingView: BaseView {
             make.height.equalTo(30)
         }
         
+        let buttonWidth = (UIScreen.main.bounds.width - 60) / 3 // 3등분한 너비 계산
+        
         largeSizeButton.snp.makeConstraints { make in
             make.top.equalTo(sizeSelectLabel.snp.bottom).offset(10)
             make.left.equalToSuperview().inset(20)
-            make.width.equalTo(100)
+            make.width.equalTo(buttonWidth)
             make.height.equalTo(40)
         }
         
         mediumSizeButton.snp.makeConstraints { make in
             make.top.equalTo(sizeSelectLabel.snp.bottom).offset(10)
-            make.left.equalTo(largeSizeButton.snp.right).offset(20)
-            make.width.equalTo(100)
+            make.left.equalTo(largeSizeButton.snp.right).offset(10)
+            make.width.equalTo(buttonWidth)
             make.height.equalTo(40)
         }
         
         smallSizeButton.snp.makeConstraints { make in
             make.top.equalTo(sizeSelectLabel.snp.bottom).offset(10)
-            make.left.equalTo(mediumSizeButton.snp.right).offset(20)
-            make.width.equalTo(100)
+            make.left.equalTo(mediumSizeButton.snp.right).offset(10)
+            make.width.equalTo(buttonWidth)
             make.height.equalTo(40)
         }
         
@@ -204,18 +262,49 @@ class CreateDrawingView: BaseView {
         }
     }
     
-    @objc func sizeButtonTapped(_ sender: UIButton) {
-        let buttons = [largeSizeButton, mediumSizeButton, smallSizeButton]
-        buttons.forEach { button in
-            if button == sender {
-                button.backgroundColor = .lightGray
-            } else {
-                button.backgroundColor = .white
-            }
-        }
-    }
+//    @objc func sizeButtonTapped(_ sender: UIButton) {
+//        let buttons = [largeSizeButton, mediumSizeButton, smallSizeButton]
+//        buttons.forEach { button in
+//            if button == sender {
+//                button.backgroundColor = .lightGray
+//                
+//                // 크기 조정 애니메이션
+//                var height: CGFloat = 430
+//                var width: CGFloat = 322.5
+//                switch button {
+//                case largeSizeButton:
+//                    height = 430
+//                    width = 322.5
+//                case mediumSizeButton:
+//                    height = 300
+//                    width = 225
+//                case smallSizeButton:
+//                    height = 200
+//                    width = 150
+//                default:
+//                    height = 430
+//                    width = 322.5
+//                }
+//                
+//                UIView.animate(withDuration: 0.3) {
+//                    self.resultImageView.snp.remakeConstraints { make in
+//                        make.top.equalTo(self.titleLabel.snp.bottom).offset(10)
+//                        make.left.equalToSuperview().inset(20)
+//                        make.right.equalToSuperview().inset(20)
+//                        make.height.equalTo(height)
+//                        make.width.equalTo(width)
+//                    }
+//                    self.layoutIfNeeded()
+//                }
+//            } else {
+//                button.backgroundColor = .white
+//            }
+//        }
+//    }
+    
     func printToggleLoading(_ isLoading: Bool) {
         titleLabel.isHidden = isLoading
+        a4PageImageView.isHidden = isLoading
         resultImageView.isHidden = isLoading
         redrawingButton.isHidden = isLoading
         printButton.isHidden = isLoading
@@ -227,9 +316,11 @@ class CreateDrawingView: BaseView {
         loadingImageView.isHidden = !isLoading
         progressBar.isHidden = !isLoading
     }
+    
     func setProgress(_ progress: Float) {
         progressBar.setProgress(progress, animated: true)
     }
+    
     func printSuccessReturnUI(_ isLoading: Bool) {
         titleLabel.isHidden = isLoading
         titleLabel.isHidden = isLoading
@@ -244,7 +335,6 @@ class CreateDrawingView: BaseView {
         loadingImageView.isHidden = !isLoading
         progressBar.isHidden = !isLoading
     }
-    
 }
 
 // UIImage 확장: 특정 색상과 크기의 이미지를 생성하기 위한 편의 메서드 추가
@@ -260,4 +350,11 @@ extension UIImage {
         self.init(cgImage: cgImage)
     }
 }
+
+
+
+
+
+
+
 

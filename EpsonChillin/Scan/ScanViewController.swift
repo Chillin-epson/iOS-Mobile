@@ -27,7 +27,7 @@ class ScanViewController: BaseViewController {
         backButton.tintColor = .gray
         navigationItem.leftBarButtonItem = backButton
         
-        view?.backgroundColor = UIColor(named: "MainBackGroundColor")
+        //view?.backgroundColor = UIColor(named: "MainBackGroundColor")
         scanView.collectionView.delegate = self
         scanView.collectionView.dataSource = self
         
@@ -93,6 +93,7 @@ extension ScanViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let drawing = drawings[indexPath.item]
         let scanCheckVC = ScanCheckViewController()
         scanCheckVC.drawing = drawing
+        scanCheckVC.drawingId = drawing.drawingId
         
         let scanCheckNaviController = UINavigationController(rootViewController: scanCheckVC)
         scanCheckNaviController.modalPresentationStyle = .overFullScreen

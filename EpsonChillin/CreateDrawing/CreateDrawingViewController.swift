@@ -22,7 +22,7 @@ class CreateDrawingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view?.backgroundColor = UIColor(named: "MainBackGroundColor")
+        //view?.backgroundColor = UIColor(named: "MainBackGroundColor")
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(closeButtonTapped))
         backButton.tintColor = .gray
@@ -34,9 +34,30 @@ class CreateDrawingViewController: BaseViewController {
         createDrawingView.printButton.addTarget(self, action: #selector(printButtonTapped), for: .touchUpInside)
         createDrawingView.sizePrintButton.addTarget(self, action: #selector(sizePrintButtonTapped), for: .touchUpInside)
         
-        createDrawingView.largeSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
-        createDrawingView.mediumSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
-        createDrawingView.smallSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        //        createDrawingView.largeSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        //        createDrawingView.mediumSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        //        createDrawingView.smallSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        createDrawingView.largeSizeButton.addTarget(self, action: #selector(largeSizeButtonTapped), for: .touchUpInside)
+        createDrawingView.mediumSizeButton.addTarget(self, action: #selector(mediumSizeButtonTapped), for: .touchUpInside)
+        createDrawingView.smallSizeButton.addTarget(self, action: #selector(smallSizeButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func largeSizeButtonTapped() {
+        createDrawingView.resultImageView.isHidden = false
+        createDrawingView.resultMediumImageView.isHidden = true
+        createDrawingView.resultSmallImageView.isHidden = true
+    }
+    
+    @objc func mediumSizeButtonTapped() {
+        createDrawingView.resultImageView.isHidden = true
+        createDrawingView.resultMediumImageView.isHidden = false
+        createDrawingView.resultSmallImageView.isHidden = true
+    }
+    
+    @objc func smallSizeButtonTapped() {
+        createDrawingView.resultImageView.isHidden = true
+        createDrawingView.resultMediumImageView.isHidden = true
+        createDrawingView.resultSmallImageView.isHidden = false
     }
     
     @objc func closeButtonTapped() {
@@ -98,17 +119,36 @@ class CreateDrawingViewController: BaseViewController {
         let confirmAction = UIAlertAction(title: "예", style: .default) { _ in
             self.createDrawingView.printToggleLoading(true)
             self.startProgressBar()
-            //self.printDrawing()
-            
-            
+            self.printDrawing()
         }
         
-        let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "아니오", style: .cancel) { _ in
+            self.showPrintAndSaveButtons()
+        }
         
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func showPrintAndSaveButtons() {
+        createDrawingView.a4PageImageView.isHidden = false
+        createDrawingView.resultImageView.isHidden = false
+        createDrawingView.resultMediumImageView.isHidden = true
+        createDrawingView.resultSmallImageView.isHidden = true
+        createDrawingView.printButton.isHidden = false
+        createDrawingView.redrawingButton.isHidden = false
+        
+        createDrawingView.sizeSelectLabel.isHidden = true
+        createDrawingView.largeSizeButton.isHidden = true
+        createDrawingView.mediumSizeButton.isHidden = true
+        createDrawingView.smallSizeButton.isHidden = true
+        createDrawingView.sizePrintButton.isHidden = true
+        
+        createDrawingView.loadingImageView.isHidden = true
+        createDrawingView.progressBar.isHidden = true
+        
     }
     
     func printDrawing() {
@@ -125,9 +165,11 @@ class CreateDrawingViewController: BaseViewController {
             }
         }
     }
-
+    
     func loadImage(from url: URL) {
         createDrawingView.resultImageView.kf.setImage(with: url)
+        createDrawingView.resultMediumImageView.kf.setImage(with: url)
+        createDrawingView.resultSmallImageView.kf.setImage(with: url)
     }
     
     func startProgressBar() {
