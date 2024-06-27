@@ -57,7 +57,10 @@ class ScanView: BaseView {
     
     override func setConstraints() {
         backgroundImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(-10)
+            make.left.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().inset(-10)
+            make.bottom.equalToSuperview().inset(-10)
         }
         voiceTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(10)
@@ -91,61 +94,6 @@ class ScanView: BaseView {
         
         return layout
     }
-//    private func collectionViewLayout() -> UICollectionViewFlowLayout {
-//        let layout = UICollectionViewFlowLayout()
-//        
-//        let padding: CGFloat = 20
-//        let itemsPerRow: CGFloat = 2
-//        let itemSpacing: CGFloat = 10
-//        let totalSpacing: CGFloat = (itemsPerRow - 1) * itemSpacing + padding * 2
-//        let itemWidth = (UIScreen.main.bounds.width - totalSpacing) / itemsPerRow
-//        
-//        layout.itemSize = CGSize(width: itemWidth, height: 270)
-//        layout.minimumInteritemSpacing = itemSpacing
-//        layout.minimumLineSpacing = itemSpacing
-//        layout.sectionInset = UIEdgeInsets(top: 20, left: padding, bottom: 20, right: padding)
-//        
-//        return layout
-//    }
-
 
     
 }
-
-
-//    lazy var scanImageButton: UIButton = {
-//        let button = UIButton()
-//        button.layer.cornerRadius = 10
-//        button.backgroundColor = .clear
-//        button.setTitle("스캔한 그림", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-//        button.layer.borderWidth = 2
-//        button.layer.borderColor = UIColor(.black).cgColor
-//        return button
-//    }()
-//
-//    lazy var createImageButton: UIButton = {
-//        let button = UIButton()
-//        button.layer.cornerRadius = 10
-//        button.backgroundColor = .clear
-//        button.setTitle("생성한 도안", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-//        button.layer.borderWidth = 2
-//        button.layer.borderColor = UIColor(.black).cgColor
-//        return button
-//    }()
-
-//        scanImageButton.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(5)
-//            make.leading.equalToSuperview().inset(20)
-//            make.width.equalToSuperview().multipliedBy(0.45)
-//            make.height.equalTo(50)
-//        }
-//        createImageButton.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(5)
-//            make.trailing.equalToSuperview().inset(20)
-//            make.width.equalToSuperview().multipliedBy(0.45)
-//            make.height.equalTo(50)
-//        }

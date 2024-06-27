@@ -230,7 +230,7 @@ class VoiceViewController: BaseViewController, SFSpeechRecognizerDelegate {
     func startProgressBar() {
         var progress: Float = 0.0
         voiceView.setProgress(progress)
-        let duration: Float = 20.0
+        let duration: Float = 35.0
         let increment = 1.0 / duration
 
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in

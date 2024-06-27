@@ -97,9 +97,8 @@ class CreateDrawingView: BaseView {
         button.layer.cornerRadius = 10
         button.setTitle("크게", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
+        button.backgroundColor = .lightGray
         button.isHidden = true
-        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -110,7 +109,6 @@ class CreateDrawingView: BaseView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
-        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -121,7 +119,6 @@ class CreateDrawingView: BaseView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
-        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -175,7 +172,10 @@ class CreateDrawingView: BaseView {
     
     override func setConstraints() {
         backgroundImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(-10)
+            make.left.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().inset(-10)
+            make.bottom.equalToSuperview().inset(-10)
             
         }
         titleLabel.snp.makeConstraints { make in
@@ -184,22 +184,22 @@ class CreateDrawingView: BaseView {
             make.left.equalToSuperview().offset(20)
         }
         a4PageImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(0)
             make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(500)
+            make.height.equalTo(470)
         }
         resultImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(0)
             make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(500)
+            make.height.equalTo(470)
         }
         resultMediumImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(0)
             make.left.right.equalToSuperview().inset(50)
-            make.height.equalTo(375)
+            make.height.equalTo(345)
         }
         resultSmallImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(0)
             make.left.right.equalToSuperview().inset(80)
             make.height.equalTo(250)
         }
@@ -216,7 +216,7 @@ class CreateDrawingView: BaseView {
             make.height.equalTo(60)
         }
         sizeSelectLabel.snp.makeConstraints { make in
-            make.top.equalTo(resultImageView.snp.bottom).offset(15)
+            make.top.equalTo(resultImageView.snp.bottom).offset(10)
             make.left.equalToSuperview().inset(20)
             make.height.equalTo(30)
         }
@@ -248,7 +248,7 @@ class CreateDrawingView: BaseView {
             make.top.equalTo(largeSizeButton.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
         loadingImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -306,6 +306,8 @@ class CreateDrawingView: BaseView {
         titleLabel.isHidden = isLoading
         a4PageImageView.isHidden = isLoading
         resultImageView.isHidden = isLoading
+        resultMediumImageView.isHidden = isLoading
+        resultSmallImageView.isHidden = isLoading
         redrawingButton.isHidden = isLoading
         printButton.isHidden = isLoading
         sizeSelectLabel.isHidden = isLoading
@@ -313,6 +315,7 @@ class CreateDrawingView: BaseView {
         mediumSizeButton.isHidden = isLoading
         smallSizeButton.isHidden = isLoading
         sizePrintButton.isHidden = isLoading
+        
         loadingImageView.isHidden = !isLoading
         progressBar.isHidden = !isLoading
     }
@@ -323,8 +326,10 @@ class CreateDrawingView: BaseView {
     
     func printSuccessReturnUI(_ isLoading: Bool) {
         titleLabel.isHidden = isLoading
-        titleLabel.isHidden = isLoading
+        a4PageImageView.isHidden = isLoading
         resultImageView.isHidden = isLoading
+        resultMediumImageView.isHidden = !isLoading
+        resultSmallImageView.isHidden = !isLoading
         redrawingButton.isHidden = isLoading
         printButton.isHidden = isLoading
         sizeSelectLabel.isHidden = !isLoading

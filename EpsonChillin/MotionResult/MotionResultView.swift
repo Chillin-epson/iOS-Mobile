@@ -47,7 +47,10 @@ class MotionResultView: BaseView {
     
     override func setConstraints() {
         backgroundImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(-10)
+            make.left.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().inset(-10)
+            make.bottom.equalToSuperview().inset(-10)
         }
         gifImageView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(40)

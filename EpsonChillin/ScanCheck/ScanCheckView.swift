@@ -5,99 +5,6 @@
 //  Created by 이승현 on 6/21/24.
 //
 
-//import UIKit
-//import SnapKit
-//
-//class ScanCheckView: BaseView {
-//    
-//    lazy var backgroundImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "배경")
-//        imageView.contentMode = .scaleAspectFill
-//        return imageView
-//    }()
-//    
-//    lazy var resultImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.layer.cornerRadius = 16
-//        imageView.layer.masksToBounds = true
-//        imageView.image = UIImage(color: .white, size: CGSize(width: 1, height: 1))
-//        return imageView
-//    }()
-//    
-//    lazy var cameraButton: UIButton = {
-//        let button = UIButton()
-//        button.layer.cornerRadius = 10
-//        button.backgroundColor = .lightGray
-//        let cameraImage = UIImage(systemName: "camera.fill")
-//        button.setImage(cameraImage, for: .normal)
-//        button.backgroundColor = .white
-//        button.tintColor = .black
-//        button.imageView?.contentMode = .scaleAspectFit
-//        return button
-//    }()
-//    
-//    lazy var printButton: UIButton = {
-//        let button = UIButton()
-//        button.layer.cornerRadius = 10
-//        button.backgroundColor = UIColor(named: "인쇄하기 비활")
-//        button.setTitle("인쇄하기", for: .normal)
-//        button.setTitleColor(UIColor(named: "인쇄하기 활성"), for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-//        button.layer.borderWidth = 1
-//        button.layer.borderColor = UIColor(named: "인쇄하기 활성")?.cgColor
-//        return button
-//    }()
-//    
-//    lazy var removeImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.layer.cornerRadius = 16
-//        imageView.layer.masksToBounds = true
-//        imageView.image = UIImage(color: .white, size: CGSize(width: 1, height: 1))
-//        imageView.isHidden = true
-//        return imageView
-//    }()
-//    
-//    override func configureView() {
-//        addSubview(backgroundImageView)
-//        addSubview(resultImageView)
-//        addSubview(cameraButton)
-//        addSubview(printButton)
-//        addSubview(removeImageView)
-//        sendSubviewToBack(backgroundImageView)
-//    }
-//    
-//    override func setConstraints() {
-//        backgroundImageView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-//        resultImageView.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(40)
-//            make.left.right.equalToSuperview().inset(20)
-//            make.height.equalTo(500)
-//        }
-//        cameraButton.snp.makeConstraints { make in
-//            make.top.equalTo(resultImageView.snp.bottom).offset(20)
-//            make.trailing.equalToSuperview().inset(20)
-//            make.width.height.equalTo(60)
-//        }
-//        
-////        removeImageView.snp.makeConstraints { make in
-////            make.top.equalTo(resultImageView.snp.bottom).offset(0)
-////            make.leading.equalToSuperview().inset(20)
-////            make.width.height.equalTo(100)
-////        }
-//        
-//        removeImageView.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
-//            make.leading.equalToSuperview().inset(10)
-//            make.width.height.equalTo(200)
-//        }
-//    }
-//}
-
 import UIKit
 import SnapKit
 
@@ -174,9 +81,8 @@ class ScanCheckView: BaseView {
         button.layer.cornerRadius = 10
         button.setTitle("크게", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
+        button.backgroundColor = .lightGray
         button.isHidden = true
-        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -187,7 +93,6 @@ class ScanCheckView: BaseView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
-        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -198,7 +103,6 @@ class ScanCheckView: BaseView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
-        //button.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -275,25 +179,28 @@ class ScanCheckView: BaseView {
     
     override func setConstraints() {
         backgroundImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(-10)
+            make.left.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().inset(-10)
+            make.bottom.equalToSuperview().inset(-10)
         }
         a4PageImageView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(40)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(500)
+            make.height.equalTo(470)
         }
         resultImageView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(40)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(500)
+            make.height.equalTo(470)
         }
         resultMediumImageView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(40)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.left.right.equalToSuperview().inset(50)
-            make.height.equalTo(375)
+            make.height.equalTo(345)
         }
         resultSmallImageView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(40)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.left.right.equalToSuperview().inset(80)
             make.height.equalTo(250)
         }
@@ -304,7 +211,7 @@ class ScanCheckView: BaseView {
             make.height.equalTo(50)
         }
         sizeSelectLabel.snp.makeConstraints { make in
-            make.top.equalTo(resultImageView.snp.bottom).offset(25)
+            make.top.equalTo(resultImageView.snp.bottom).offset(15)
             make.left.equalToSuperview().inset(20)
             make.height.equalTo(30)
         }
@@ -312,28 +219,28 @@ class ScanCheckView: BaseView {
         let buttonWidth = (UIScreen.main.bounds.width - 60) / 3
         
         largeSizeButton.snp.makeConstraints { make in
-            make.top.equalTo(sizeSelectLabel.snp.bottom).offset(20)
+            make.top.equalTo(sizeSelectLabel.snp.bottom).offset(15)
             make.left.equalToSuperview().inset(20)
             make.width.equalTo(buttonWidth)
             make.height.equalTo(40)
         }
         
         mediumSizeButton.snp.makeConstraints { make in
-            make.top.equalTo(sizeSelectLabel.snp.bottom).offset(20)
+            make.top.equalTo(sizeSelectLabel.snp.bottom).offset(15)
             make.left.equalTo(largeSizeButton.snp.right).offset(10)
             make.width.equalTo(buttonWidth)
             make.height.equalTo(40)
         }
         
         smallSizeButton.snp.makeConstraints { make in
-            make.top.equalTo(sizeSelectLabel.snp.bottom).offset(20)
+            make.top.equalTo(sizeSelectLabel.snp.bottom).offset(15)
             make.left.equalTo(mediumSizeButton.snp.right).offset(10)
             make.width.equalTo(buttonWidth)
             make.height.equalTo(40)
         }
         
         sizePrintButton.snp.makeConstraints { make in
-            make.top.equalTo(largeSizeButton.snp.bottom).offset(30)
+            make.top.equalTo(largeSizeButton.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
             make.height.equalTo(60)
@@ -342,7 +249,7 @@ class ScanCheckView: BaseView {
             make.top.equalTo(printButton.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
         loadingImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -388,6 +295,9 @@ class ScanCheckView: BaseView {
     
     func printToggleLoading(_ isLoading: Bool) {
         resultImageView.isHidden = isLoading
+        a4PageImageView.isHidden = isLoading
+        resultSmallImageView.isHidden = isLoading
+        resultMediumImageView.isHidden = isLoading
         printButton.isHidden = isLoading
         sizeSelectLabel.isHidden = isLoading
         largeSizeButton.isHidden = isLoading
@@ -405,11 +315,13 @@ class ScanCheckView: BaseView {
     func printSuccessReturnUI(_ isLoading: Bool) {
         resultImageView.isHidden = isLoading
         printButton.isHidden = isLoading
+        a4PageImageView.isHidden = isLoading
         sizeSelectLabel.isHidden = !isLoading
         largeSizeButton.isHidden = !isLoading
         mediumSizeButton.isHidden = !isLoading
         smallSizeButton.isHidden = !isLoading
         sizePrintButton.isHidden = !isLoading
+        saveImageButton.isHidden = isLoading
         loadingImageView.isHidden = !isLoading
         progressBar.isHidden = !isLoading
     }

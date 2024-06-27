@@ -4,126 +4,6 @@
 //
 //  Created by 이승현 on 6/21/24.
 
-//import UIKit
-//import Vision
-//import AVFoundation
-//import Photos
-//import SnapKit
-//
-//class ScanCheckViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    
-//    let scanCheckView = ScanCheckView()
-//    var drawing: Drawing?
-//    
-//    override func loadView() {
-//        self.view = scanCheckView
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        //view.backgroundColor = UIColor(named: "MainBackGroundColor")
-//        
-//        if let drawing = drawing, let url = URL(string: drawing.url) {
-//            scanCheckView.resultImageView.kf.setImage(with: url)
-//            scanCheckView.removeImageView.kf.setImage(with: url)
-//        }
-//        
-//        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(closeButtonTapped))
-//        backButton.tintColor = .gray
-//        navigationItem.leftBarButtonItem = backButton
-//        
-//        configureView()
-//    }
-//    
-//    @objc func closeButtonTapped() {
-//        dismiss(animated: true, completion: nil)
-//    }
-//    
-//    override func configureView() {
-//        scanCheckView.cameraButton.addTarget(self, action: #selector(cameraButtonTapped), for: .touchUpInside)
-//    }
-//    
-//    @objc func cameraButtonTapped() {
-//        presentCameraWithOverlay()
-//    }
-//    
-//    func presentCameraWithOverlay() {
-//        let cameraVC = UIImagePickerController()
-//        cameraVC.delegate = self
-//        cameraVC.sourceType = .camera
-//        cameraVC.cameraOverlayView = createOverlayView()
-//        present(cameraVC, animated: true, completion: nil)
-//    }
-//    
-//    func createOverlayView() -> UIView {
-//        let overlayView = UIView(frame: view.bounds)
-//        overlayView.backgroundColor = .clear
-//        overlayView.isUserInteractionEnabled = false // 터치 이벤트 전달을 위해 추가
-//        
-//        // ScanCheckView의 removeImageView 위치를 기준으로 카메라 오버레이 뷰에 이미지 뷰 추가
-//        let removeImageViewFrame = scanCheckView.convert(scanCheckView.removeImageView.frame, to: overlayView)
-//        let removeImageView = UIImageView(frame: removeImageViewFrame)
-//        removeImageView.image = scanCheckView.removeImageView.image
-//        removeImageView.contentMode = .scaleAspectFit
-//        
-//        overlayView.addSubview(removeImageView)
-//        
-//        return overlayView
-//    }
-//    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        if let originalImage = info[.originalImage] as? UIImage {
-//            UIGraphicsBeginImageContextWithOptions(originalImage.size, false, originalImage.scale)
-//            
-//            originalImage.draw(in: CGRect(origin: .zero, size: originalImage.size))
-//            
-//            if let overlayImage = scanCheckView.removeImageView.image {
-//                // removeImageView의 크기와 위치를 실제 캡처 이미지의 크기에 맞게 변환하여 비율 유지
-//                let overlayFrame = scanCheckView.removeImageView.frame
-//                let imageSize = originalImage.size
-//                let overlayOrigin = CGPoint(
-//                    x: overlayFrame.origin.x * (imageSize.width / scanCheckView.bounds.width),
-//                    y: overlayFrame.origin.y * (imageSize.height / scanCheckView.bounds.height)
-//                )
-//                let overlayAspect = overlayImage.size.width / overlayImage.size.height
-//                let overlaySize: CGSize
-//                if overlayFrame.size.width / overlayFrame.size.height > overlayAspect {
-//                    overlaySize = CGSize(
-//                        width: overlayFrame.size.height * overlayAspect * (imageSize.width / scanCheckView.bounds.width),
-//                        height: overlayFrame.size.height * (imageSize.height / scanCheckView.bounds.height)
-//                    )
-//                } else {
-//                    overlaySize = CGSize(
-//                        width: overlayFrame.size.width * (imageSize.width / scanCheckView.bounds.width),
-//                        height: overlayFrame.size.width / overlayAspect * (imageSize.height / scanCheckView.bounds.height)
-//                    )
-//                }
-//                let overlayRect = CGRect(
-//                    x: overlayOrigin.x + (overlayFrame.size.width * (imageSize.width / scanCheckView.bounds.width) - overlaySize.width) / 2,
-//                    y: overlayOrigin.y + (overlayFrame.size.height * (imageSize.height / scanCheckView.bounds.height) - overlaySize.height) / 2,
-//                    width: overlaySize.width,
-//                    height: overlaySize.height
-//                )
-//                overlayImage.draw(in: overlayRect)
-//            }
-//            
-//            let combinedImage = UIGraphicsGetImageFromCurrentImageContext()
-//            UIGraphicsEndImageContext()
-//            
-//            if let combinedImage = combinedImage {
-//                UIImageWriteToSavedPhotosAlbum(combinedImage, nil, nil, nil)
-//            }
-//        }
-//        
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-//}
-
-
-
-
-
 import UIKit
 import Alamofire
 import Kingfisher
@@ -164,11 +44,11 @@ class ScanCheckViewController: BaseViewController, UIImagePickerControllerDelega
     override func configureView() {
         scanCheckView.printButton.addTarget(self, action: #selector(printButtonTapped), for: .touchUpInside)
         scanCheckView.sizePrintButton.addTarget(self, action: #selector(sizePrintButtonTapped), for: .touchUpInside)
-        
-//        scanCheckView.largeSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
-//        scanCheckView.mediumSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
-//        scanCheckView.smallSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
-        
+        //버튼색 바꾸기
+        scanCheckView.largeSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        scanCheckView.mediumSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        scanCheckView.smallSizeButton.addTarget(self, action: #selector(sizeButtonTapped(_:)), for: .touchUpInside)
+        //사이즈별 미리보기화면
         scanCheckView.largeSizeButton.addTarget(self, action: #selector(largeSizeButtonTapped), for: .touchUpInside)
         scanCheckView.mediumSizeButton.addTarget(self, action: #selector(mediumSizeButtonTapped), for: .touchUpInside)
         scanCheckView.smallSizeButton.addTarget(self, action: #selector(smallSizeButtonTapped), for: .touchUpInside)
@@ -229,7 +109,6 @@ class ScanCheckViewController: BaseViewController, UIImagePickerControllerDelega
         
         let confirmAction = UIAlertAction(title: "예", style: .default) { _ in
             self.scanCheckView.printToggleLoading(true)
-            self.startProgressBar()
             self.printDrawing()
         }
         
@@ -259,12 +138,19 @@ class ScanCheckViewController: BaseViewController, UIImagePickerControllerDelega
         let parameters: [String: Any] = ["drawingId": drawingId, "scale": selectedSize]
         
         AF.request("https://api.zionhann.shop/app/chillin/drawings/print", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                print("Print Success: \(value)")
-            case .failure(let error):
-                print("Error: \(error)")
+            if let statusCode = response.response?.statusCode {
+                if statusCode == 200 {
+                    print("Print Success: \(response)")
+                    self.showPrintSuccessAlert()
+                } else {
+                    print("Print Failure: \(response)")
+                    self.showPrintFailureAlert()
+                }
+            } else {
+                print("Error: \(response.error ?? AFError.explicitlyCancelled)")
+                self.showPrintFailureAlert()
             }
+            self.scanCheckView.printSuccessReturnUI(false)
         }
     }
     
@@ -291,6 +177,36 @@ class ScanCheckViewController: BaseViewController, UIImagePickerControllerDelega
         }
     }
     
+    func showPrintSuccessAlert() {
+        let alertController = UIAlertController(title: "프린트 완료!", message: "처음화면으로 돌아가시겠습니까?", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "예", style: .default) { _ in
+            let mainVC = MainViewController()
+            let mainNaviController = UINavigationController(rootViewController: mainVC)
+            mainNaviController.modalPresentationStyle = .overFullScreen
+            self.present(mainNaviController, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    func showPrintFailureAlert() {
+        let alertController = UIAlertController(title: "오류!", message: "프린트 실패!", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            self.showPrintAndSaveButtons()
+        }
+        
+        alertController.addAction(confirmAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func startProgressBar() {
         var progress: Float = 0.0
         scanCheckView.setProgress(progress)
@@ -299,29 +215,10 @@ class ScanCheckViewController: BaseViewController, UIImagePickerControllerDelega
             self.scanCheckView.setProgress(progress)
             if progress >= 1.0 {
                 timer.invalidate()
-                self.scanCheckView.printSuccessReturnUI(false)
-                let alertController = UIAlertController(title: "프린트 완료!", message: "처음화면으로 돌아가시겠습니까?", preferredStyle: .alert)
-                
-                let confirmAction = UIAlertAction(title: "예", style: .default) { _ in
-                    let mainVC = MainViewController()
-                    let mainNaviController = UINavigationController(rootViewController: mainVC)
-                    mainNaviController.modalPresentationStyle = .overFullScreen
-                    self.present(mainNaviController, animated: true, completion: nil)
-                }
-                
-                let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
-                
-                alertController.addAction(confirmAction)
-                alertController.addAction(cancelAction)
-                
-                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
 }
-
-
-
 
 
 

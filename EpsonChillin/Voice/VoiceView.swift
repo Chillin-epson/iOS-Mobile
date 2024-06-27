@@ -68,13 +68,13 @@ class VoiceView: BaseView, UITextViewDelegate {
     lazy var drawingButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
-        button.setTitle("도안 만들기 >", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        //button.backgroundColor = .white
-        button.backgroundColor = UIColor(named: "인쇄하기 비활")
-        button.layer.borderColor = UIColor(named: "인쇄하기 활성")?.cgColor
-        button.layer.borderWidth = 2.0
+        button.setTitle("도안 만들기", for: .normal)
+        button.setTitleColor(UIColor(named: "인쇄하기 활성"), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.backgroundColor = .white
+        //button.backgroundColor = UIColor(named: "인쇄하기 비활")
+        //button.layer.borderColor = UIColor(named: "인쇄하기 활성")?.cgColor
+
         return button
     }()
     
@@ -109,7 +109,10 @@ class VoiceView: BaseView, UITextViewDelegate {
     
     override func setConstraints() {
         backgroundImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(-10)
+            make.left.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().inset(-10)
+            make.bottom.equalToSuperview().inset(-10)
         }
         voiceTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
