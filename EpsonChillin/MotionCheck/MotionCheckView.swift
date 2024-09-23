@@ -218,6 +218,7 @@ class MotionCheckView: BaseView {
         loadingImageView.isHidden = !isLoad
         progressBar.isHidden = !isLoad
     }
+    
     func setProgress(_ progress: Float) {
         progressBar.setProgress(progress, animated: true)
     }

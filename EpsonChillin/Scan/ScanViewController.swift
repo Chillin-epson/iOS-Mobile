@@ -42,7 +42,7 @@ class ScanViewController: BaseViewController {
         guard !isLoading, hasMoreData else { return }
         isLoading = true
         
-        let url = "https://api.zionhann.shop/app/chillin/drawings"
+        let url = "https://api.zionhann.com/chillin/drawings"
         let parameters: [String: Any] = ["type": "GENERATED", "page": page]
         
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
@@ -64,8 +64,9 @@ class ScanViewController: BaseViewController {
         }
     }
 }
-
+// MARK: - <#내용입력#>
 extension ScanViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return drawings.count
     }

@@ -200,7 +200,7 @@ class VoiceViewController: BaseViewController, SFSpeechRecognizerDelegate {
         
         let parameters: [String: Any] = ["prompt": prompt]
         
-        AF.request("https://api.zionhann.shop/app/chillin/drawings/gen", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON { response in
+        AF.request("https://api.zionhann.com/chillin/drawings/gen", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON { response in
             switch response.result {
             case .success(let value):
                 print("Generate Drawing Success: \(value)")

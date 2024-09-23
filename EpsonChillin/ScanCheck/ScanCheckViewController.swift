@@ -137,7 +137,7 @@ class ScanCheckViewController: BaseViewController, UIImagePickerControllerDelega
         print("drawingId: \(drawingId)")
         let parameters: [String: Any] = ["drawingId": drawingId, "scale": selectedSize]
         
-        AF.request("https://api.zionhann.shop/app/chillin/drawings/print", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON { response in
+        AF.request("https://api.zionhann.com/chillin/drawings/print", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON { response in
             if let statusCode = response.response?.statusCode {
                 if statusCode == 200 {
                     print("Print Success: \(response)")
