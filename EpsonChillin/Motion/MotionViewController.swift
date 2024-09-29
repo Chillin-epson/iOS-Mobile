@@ -41,7 +41,7 @@ class MotionViewController: BaseViewController {
         guard !isLoading, hasMoreData else { return }
         isLoading = true
         
-        let url = "https://api.zionhann.shop/app/chillin/drawings"
+        let url = "https://api.zionhann.com/chillin/drawings"
         let parameters: [String: Any] = ["type": "SCANNED", "page": page]
         
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in

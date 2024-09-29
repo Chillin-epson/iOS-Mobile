@@ -31,6 +31,8 @@
 		02577B352C1CDDCB00FA123D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02577B342C1CDDCB00FA123D /* LottieView.swift */; };
 		02654EE62C23BB2600A89E95 /* CreateDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02654EE52C23BB2600A89E95 /* CreateDrawingViewController.swift */; };
 		02654EE82C23BD0A00A89E95 /* CreateDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02654EE72C23BD0A00A89E95 /* CreateDrawingView.swift */; };
+		02C3EDD92CA44A3200706C75 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3EDD82CA44A3200706C75 /* LoginView.swift */; };
+		02C3EDDB2CA44A4E00706C75 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3EDDA2CA44A4E00706C75 /* LoginViewController.swift */; };
 		02CFC38A2C247FB500194B95 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC3892C247FB500194B95 /* ScanViewController.swift */; };
 		02CFC38C2C2482F500194B95 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC38B2C2482F500194B95 /* ScanView.swift */; };
 		02CFC38F2C2587D100194B95 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CFC38E2C2587D100194B95 /* CollectionViewCell.swift */; };
@@ -64,6 +66,8 @@
 		02577B342C1CDDCB00FA123D /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		02654EE52C23BB2600A89E95 /* CreateDrawingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDrawingViewController.swift; sourceTree = "<group>"; };
 		02654EE72C23BD0A00A89E95 /* CreateDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDrawingView.swift; sourceTree = "<group>"; };
+		02C3EDD82CA44A3200706C75 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		02C3EDDA2CA44A4E00706C75 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		02CFC3892C247FB500194B95 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		02CFC38B2C2482F500194B95 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		02CFC38E2C2587D100194B95 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				02577AF32C1C934000FA123D /* AppDelegate.swift */,
 				02577AF52C1C934000FA123D /* SceneDelegate.swift */,
 				02577B1B2C1C9DEB00FA123D /* Base */,
+				02C3EDD72CA449FF00706C75 /* OnBoarding */,
 				02577B1A2C1C9DCA00FA123D /* Main */,
 				02577B262C1CB8BD00FA123D /* Voice */,
 				02654EE42C23BAC400A89E95 /* CreateDrawing */,
@@ -176,6 +181,15 @@
 				02654EE72C23BD0A00A89E95 /* CreateDrawingView.swift */,
 			);
 			path = CreateDrawing;
+			sourceTree = "<group>";
+		};
+		02C3EDD72CA449FF00706C75 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				02C3EDDA2CA44A4E00706C75 /* LoginViewController.swift */,
+				02C3EDD82CA44A3200706C75 /* LoginView.swift */,
+			);
+			path = OnBoarding;
 			sourceTree = "<group>";
 		};
 		02CFC38D2C25562B00194B95 /* Scan */ = {
@@ -300,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C3EDDB2CA44A4E00706C75 /* LoginViewController.swift in Sources */,
 				024BB19C2C26ED2600FF8DB2 /* MotionResultController.swift in Sources */,
 				02577AF82C1C934000FA123D /* MainViewController.swift in Sources */,
 				02CFC3992C25A40800194B95 /* MotionView.swift in Sources */,
@@ -310,6 +325,7 @@
 				02CFC3912C259FAE00194B95 /* ScanCheckView.swift in Sources */,
 				02CFC38F2C2587D100194B95 /* CollectionViewCell.swift in Sources */,
 				02CFC38C2C2482F500194B95 /* ScanView.swift in Sources */,
+				02C3EDD92CA44A3200706C75 /* LoginView.swift in Sources */,
 				02577B1D2C1C9E0900FA123D /* BaseViewController.swift in Sources */,
 				02577B1F2C1C9E2200FA123D /* BaseView.swift in Sources */,
 				02654EE62C23BB2600A89E95 /* CreateDrawingViewController.swift in Sources */,

@@ -103,7 +103,7 @@ class MotionCheckViewController: BaseViewController, UIImagePickerControllerDele
         
         motionCheckView.motionViewHidden(true)
         startProgressBar()
-            let url = "https://api.zionhann.shop/app/chillin/motion/\(drawing.drawingId)"
+            let url = "https://api.zionhann.com/chillin/motion/\(drawing.drawingId)"
             let parameters: [String: Any] = [
                 "motionType": motionSelected
             ]
