@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,9 +18,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        let vc = MainViewController() //CreateDrawingViewController() //ScanCheckViewController() //MainViewController() //ScanViewController()
+        let vc = LoginViewController() //CreateDrawingViewController() //ScanCheckViewController() //MainViewController() //ScanViewController()
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
+        
+        
+//        // MARK: - 자동로그인
+//        guard let user = UserDefaults.standard.string(forKey: "User") else {
+//            print("No User")
+//            return
+//        }
+//        
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        
+//        appleIDProvider.getCredentialState(forUserID: user) { credentialState, error in
+//            switch credentialState {
+//            case .revoked: print("Revoked")
+//                
+//                DispatchQueue.main.async {
+//                    let window = UIWindow(windowScene: scene)
+//                    window.rootViewController = LoginViewController()
+//                    self.window = window
+//                    window.makeKeyAndVisible()
+//                }
+//                
+//            case .authorized:
+//                
+//                DispatchQueue.main.async {
+//                    let window = UIWindow(windowScene: scene)
+//                    window.rootViewController = LoginViewController()
+//                    self.window = window
+//                    window.makeKeyAndVisible()
+//                }
+//                
+//            default: print("Not found")
+//            }
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

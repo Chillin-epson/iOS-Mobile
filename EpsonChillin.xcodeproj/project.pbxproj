@@ -68,6 +68,7 @@
 		02654EE72C23BD0A00A89E95 /* CreateDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDrawingView.swift; sourceTree = "<group>"; };
 		02C3EDD82CA44A3200706C75 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		02C3EDDA2CA44A4E00706C75 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		02C3EDDD2CAA9DAD00706C75 /* EpsonChillin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EpsonChillin.entitlements; sourceTree = "<group>"; };
 		02CFC3892C247FB500194B95 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		02CFC38B2C2482F500194B95 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		02CFC38E2C2587D100194B95 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 		02577AF22C1C934000FA123D /* EpsonChillin */ = {
 			isa = PBXGroup;
 			children = (
+				02C3EDDD2CAA9DAD00706C75 /* EpsonChillin.entitlements */,
 				02577AF32C1C934000FA123D /* AppDelegate.swift */,
 				02577AF52C1C934000FA123D /* SceneDelegate.swift */,
 				02577B1B2C1C9DEB00FA123D /* Base */,
@@ -482,6 +484,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EpsonChillin/EpsonChillin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DBXHWJCYZK;
@@ -518,6 +521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EpsonChillin/EpsonChillin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DBXHWJCYZK;
