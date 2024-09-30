@@ -50,22 +50,106 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
     }
 }
 
+//extension LoginViewController: ASAuthorizationControllerDelegate {
+//    
+//    //애플로 로그인 성공한 경우 -> 메인 페이지로 이동 등..
+//    //처음 시도: 계속, email, fullname 제공 (사용자 성공. email. name -> 서버
+//    //두번째 시도: 로그인할래요?, email, fullname, nil값으로 온다.
+//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+//        
+//        switch authorization.credential {
+//            
+//        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+//            
+//            print(appleIDCredential)
+//            
+//            let useridentifier = appleIDCredential.user
+//            let fullName = appleIDCredential.fullName
+//            let email = appleIDCredential.email
+//            
+//            guard let codeData = appleIDCredential.authorizationCode,
+//                  let codeString = String(data: codeData, encoding: .utf8),
+//                  let tokenData = appleIDCredential.identityToken,
+//                  let tokenToString = String(data: tokenData, encoding: .utf8) else {
+//                print("Authorization Code or Token Error")
+//                return
+//            }
+//            
+//            
+//            print(useridentifier)
+//            print(fullName ?? "No fullName")
+//            print(email ?? "No email")
+//            print(tokenToString)
+//            
+//            if email?.isEmpty ?? true {
+//                let result = decode(jwtToken: tokenToString)["email"] as? String ?? ""
+//                print(result) //UserDefualt
+//            }
+//            
+//            //이메일, 토큰, 이름 -> UserDefaults & API로 서버에 POST
+//            //서버에 Request 후 Response를 받게 되면 성공시 화면 전환
+//            
+//            UserDefaults.standard.set(useridentifier, forKey: "User")
+//            
+//            // API로 서버에 POST 요청
+//            let parameters: [String: Any] = [
+//                "code": codeString,
+//            ]
+//            
+//            let headers: HTTPHeaders = [
+//                "Content-Type": "application/json"
+//            ]
+//            
+//            let url = "https://api.zionhann.com/chillin/auth/oauth2/token"
+//            
+//            AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//                switch response.result {
+//                case .success(let value):
+//                    print("Login Success: \(value)")
+//                    
+//                    // 서버 응답에서 토큰을 추출
+//                    if let json = value as? [String: Any],
+//                       let token = json["token"] as? String,
+//                       let grantType = json["grantType"] as? String {
+//                        print("Token: \(token)")
+//                        print("Grant Type: \(grantType)")
+//                        
+//                        // 이후 액션 처리 (예: 화면 전환)
+//                        DispatchQueue.main.async {
+//                            self.present(MainViewController(), animated: true)
+//                        }
+//                    }
+//                    
+//                case .failure(let error):
+//                    // 에러 처리
+//                    print("Login Error: \(error.localizedDescription)")
+//                    if let data = response.data, let errorResponse = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+//                        print("Error Response: \(errorResponse)")
+//                    }
+//                }
+//            }
+//            
+//        case let passwordCredential as ASPasswordCredential:
+//            let username = passwordCredential.user
+//            let password = passwordCredential.password
+//            print("Username: \(username), Password: \(password)")
+//            
+//        default: break
+//        }
+//    }
+//    
+//    //애플로 로그인 실패한 경우
+//    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+//        print("Login Failed \(error.localizedDescription)")
+//    }
+//}
+
 extension LoginViewController: ASAuthorizationControllerDelegate {
     
-    //애플로 로그인 성공한 경우 -> 메인 페이지로 이동 등..
-    //처음 시도: 계속, email, fullname 제공 (사용자 성공. email. name -> 서버
-    //두번째 시도: 로그인할래요?, email, fullname, nil값으로 온다.
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         switch authorization.credential {
-            
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            
-            print(appleIDCredential)
-            
-            let useridentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
             
             guard let codeData = appleIDCredential.authorizationCode,
                   let codeString = String(data: codeData, encoding: .utf8),
@@ -75,21 +159,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 return
             }
             
+            print("Apple ID Credential Authorization Succeeded")
             
-            print(useridentifier)
-            print(fullName ?? "No fullName")
-            print(email ?? "No email")
-            print(tokenToString)
-            
-            if email?.isEmpty ?? true {
-                let result = decode(jwtToken: tokenToString)["email"] as? String ?? ""
-                print(result) //UserDefualt
-            }
-            
-            //이메일, 토큰, 이름 -> UserDefaults & API로 서버에 POST
-            //서버에 Request 후 Response를 받게 되면 성공시 화면 전환
-            
-            UserDefaults.standard.set(useridentifier, forKey: "User")
+            // 서버에 Request 후 Response를 받게 되면 성공시 화면 전환
+            UserDefaults.standard.set(appleIDCredential.user, forKey: "User")
             
             // API로 서버에 POST 요청
             let parameters: [String: Any] = [
@@ -107,21 +180,21 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 case .success(let value):
                     print("Login Success: \(value)")
                     
-                    // 서버 응답에서 토큰을 추출
                     if let json = value as? [String: Any],
                        let token = json["token"] as? String,
-                       let grantType = json["grantType"] as? String {
+                       let grantType = json["grantType"] as? String, grantType == "Bearer" {
                         print("Token: \(token)")
-                        print("Grant Type: \(grantType)")
                         
                         // 이후 액션 처리 (예: 화면 전환)
                         DispatchQueue.main.async {
                             self.present(MainViewController(), animated: true)
                         }
+                    } else {
+                        print("Invalid Response Format: \(value)")
                     }
                     
                 case .failure(let error):
-                    // 에러 처리
+                    // 서버 오류 핸들링
                     print("Login Error: \(error.localizedDescription)")
                     if let data = response.data, let errorResponse = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                         print("Error Response: \(errorResponse)")
@@ -134,15 +207,35 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let password = passwordCredential.password
             print("Username: \(username), Password: \(password)")
             
-        default: break
+        default:
+            break
         }
     }
     
-    //애플로 로그인 실패한 경우
+    // 애플 로그인 실패 처리
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("Login Failed \(error.localizedDescription)")
+        print("Login Failed with error: \(error.localizedDescription)")
+        
+        // 에러 코드에 따른 추가 처리
+        if let authorizationError = error as? ASAuthorizationError {
+            switch authorizationError.code {
+            case .canceled:
+                print("User canceled the login request.")
+            case .failed:
+                print("Authorization request failed.")
+            case .invalidResponse:
+                print("Invalid response received.")
+            case .notHandled:
+                print("Request not handled.")
+            case .unknown:
+                print("Unknown error occurred.")
+            @unknown default:
+                print("An unknown error occurred.")
+            }
+        }
     }
 }
+
 
 private func decode(jwtToken jwt: String) -> [String: Any] {
     
