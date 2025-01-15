@@ -5,7 +5,7 @@
 <img src="https://github.com/user-attachments/assets/142cc510-254d-4923-988c-d79681e214e7" width="20%">
 
 
-<img src="https://github.com/user-attachments/assets/35db0493-ec7b-49b9-baee-06a7b1013495" width="25%">
+<img src="https://github.com/user-attachments/assets/deef0ce2-a9cf-4c02-9a60-f654711c439b" width="25%">
 <p>
 
 - [News Article - Epson Innovation Chanllenge 공식 뉴스 기사](http://www.mediagb.kr/news/view.php?idx=35219)</br>
