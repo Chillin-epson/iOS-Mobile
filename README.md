@@ -15,7 +15,7 @@
 ## 프로젝트 소개
 ### 앱 설명
  - 칠하다 앱은 AI 기술을 활용하여 아이가 상상한 그림을 음성으로 입력하면 해당 도안을 생성하고, 이를 프린트하여 색칠 놀이를 즐길 수 있는 앱입니다. 색칠이 완료된 후에는 도안을 스캔하여, 색칠한 캐릭터와 함께 사진을 찍어 추억을 남길 수 있습니다.
-<img src="https://github.com/user-attachments/assets/94a38cff-a8c1-4504-938e-5abc45fe1b63" width="100%">
+<img src="https://github.com/user-attachments/assets/a3e4647b-1542-44af-85cc-37e4c7e505fd" width="100%">
 
 <img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5">
     한국엡손(주) 대표이사 후지이 시게오(CEO)
