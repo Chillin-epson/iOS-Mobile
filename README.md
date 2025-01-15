@@ -1,7 +1,7 @@
 # 칠하다 - 상상한 것을 색칠하고 프린트하다. 
 
 <p>
-<img src="https://github.com/user-attachments/assets/9b9c54cd-8f02-4b81-b0df-1d2c907d0879" width="25%">
+<img src="https://github.com/user-attachments/assets/3c36be2f-3ea8-4a90-92c7-4a125d153fa6" width="25%">
 <img src="https://github.com/user-attachments/assets/142cc510-254d-4923-988c-d79681e214e7" width="15%">
 
 
