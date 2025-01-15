@@ -158,6 +158,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 print("Authorization Code or Token Error")
                 return
             }
+            print ("이것이", codeData)
+            print ("스트링으로", codeString)
             
             print("Apple ID Credential Authorization Succeeded")
             
