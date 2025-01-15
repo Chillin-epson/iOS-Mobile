@@ -17,9 +17,29 @@
  - 칠하다 앱은 AI 기술을 활용하여 아이가 상상한 그림을 음성으로 입력하면 해당 도안을 생성하고, 이를 프린트하여 색칠 놀이를 즐길 수 있는 앱입니다. 색칠이 완료된 후에는 도안을 스캔하여, 색칠한 캐릭터와 함께 사진을 찍어 추억을 남길 수 있습니다.
 <img src="https://github.com/user-attachments/assets/a3e4647b-1542-44af-85cc-37e4c7e505fd" width="100%">
 
-<img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5">
-    한국엡손(주) 대표이사 후지이 시게오(CEO)
-
 ### 성과
- - 엡손 Epson Innovation Challenge 최우수상 1위, 1000만원 수상</br>
- - 엡손 Epson과 파트너쉽 체결 글로벌 앱 런칭 진행중</br>
+ - 엡손 Epson Innovation Challenge 최우수상(1위) 수상, 상금 1,000만 원</br>
+ - 국내 최초 개최 및 세계 3번째로 열린 글로벌 대회에서 우승
+ - 엡손 Epson과 파트너쉽 체결, 글로벌 앱 런칭 진행중</br>
+ 
+ <img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5" width="90%">
+    한국엡손(주) 대표이사 후지이 시게오(CEO)
+ 
+### 프로젝트 기간
+- 2024.06.01 ~ 2024.6.29 (4주) </br>
+
+### 프로젝트 참여 인원
+- iOS Developer 1명, Back-end 2명, Design 1명, PM 1명
+
+</br>
+
+## 기술 스택
+- **Framework**
+`UIKit`, `Speech`, `Alamofire`, `Kingfisher`, `SnapKit`, `Photos`, `AVFoundation`, `Gifu`, `Lottie`
+
+- **Design Pattern**
+`MVC`
+
+</br>
+
+## 핵심 기능과 코드 설명
