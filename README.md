@@ -22,7 +22,7 @@
  - 국내 최초 개최 및 세계 3번째로 열린 글로벌 대회에서 우승
  - 엡손 Epson과 파트너쉽 체결, 글로벌 앱 런칭 진행중</br>
  
- <img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5" width="90%">
+ <img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5" width="90%"></br>
     한국엡손(주) 대표이사 후지이 시게오(CEO)
  
 ### 프로젝트 기간
