@@ -12,7 +12,7 @@
 
 - [한국 엡손 EPSON 공식 블로그 기사](https://blog.naver.com/epsonstory/223554685463)</br>
 
-- [실제 글로벌 기업 Epson 홍보에 쓰인 유튜브 영상 링크](https://youtu.be/ldD-e7rh5Lo)</br>
+- [실제 글로벌 기업 EPSON 홍보에 쓰인 유튜브 영상 링크](https://youtu.be/ldD-e7rh5Lo)</br>
 
 
 ## 프로젝트 소개
@@ -42,6 +42,9 @@
 
 - **Design Pattern**
 `MVC`
+
+- 전체 시스템 아키텍처
+ <img src="https://github.com/user-attachments/assets/ee45f724-b13b-4777-8ed1-6c282a5266a3" width="95%"></br>
 
 </br>
 
