@@ -55,8 +55,9 @@
 
 - **1.음성인식을 활용한 텍스트 추출 및 도안 생성**</br>
 - **2.생성된 도안 인쇄하기(EPSON Connect API)**</br>
-- **3.**</br>
-- **4.**</br>
+- **3.스캔한 도안을 스캔함에서 보기 쉽게 확인**</br>
+- **4.스캔된 캐릭터를 모션을 적용하여 움직이게 만들기**</br>
+- **5.스캔된 캐릭터를 활용한 스티커 사진 촬영**</br>
 
 
  ### 1.음성인식을 활용한 텍스트 추출 및 도안 생성
@@ -164,3 +165,69 @@ func startSpeechRecognition() {
 
 
 ```
+</br>
+
+### 2.생성된 도안 인쇄하기(EPSON Connect API)
+칠하다 앱은 Epson Connect API를 활용하여 생성된 도안을 인쇄하는 기능을 제공합니다. 사용자는 출력물의 크기를 선택한 후, 프린터와의 통신을 통해 원하는 크기로 도안을 인쇄할 수 있습니다. 이 과정은 사용자의 선택을 기반으로 서버와 비동기로 통신하며, 안정적인 사용자 경험을 보장합니다.</br>
+
+ 1. Epson Connect API: Epson 프린터와의 통신을 통해 인쇄를 처리</br>
+ 2. Alamofire: 서버와의 네트워크 통신 처리</br>
+ 3. UIAlertController: 사용자 확인 메시지 표시</br>
+ 4. JSON Encoding: 데이터 전송을 위한 JSON 형식 변환</br>
+ 
+ ### 2-1. 크기 선택 및 사용자 확인
+  - 사용자가 출력물 크기를 선택하면, 선택된 크기가 서버로 전달되어 인쇄 준비를 진행합니다. 크기 선택은 버튼을 통해 이루어지며, 선택된 크기는 `selectedSize` 변수에 저장됩니다.</br>
+
+ ```swift
+ @objc func sizeButtonTapped(_ sender: UIButton) {
+    let buttons = [createDrawingView.largeSizeButton, createDrawingView.mediumSizeButton, createDrawingView.smallSizeButton]
+    buttons.forEach { button in
+        if button == sender {
+            button.backgroundColor = .lightGray
+            switch button {
+            case createDrawingView.largeSizeButton:
+                selectedSize = "LARGE"
+            case createDrawingView.mediumSizeButton:
+                selectedSize = "MEDIUM"
+            case createDrawingView.smallSizeButton:
+                selectedSize = "SMALL"
+            default:
+                selectedSize = "LARGE"
+            }
+        } else {
+            button.backgroundColor = .white
+        }
+    }
+}
+
+```
+</br>
+ 
+ ### 2-2. 서버로 인쇄 요청
+  - Epson Connect API를 통해 도안 ID와 크기 데이터를 JSON 형식으로 서버에 전달합니다. 네트워크 요청은 Alamofire를 사용하여 처리하며, 성공 여부에 따라 사용자에게 결과를 알립니다.</br>
+
+``` swift
+func printDrawing() {
+    guard let drawingId = drawingId else { return }
+    let parameters: [String: Any] = ["drawingId": drawingId, "scale": selectedSize]
+    
+    AF.request("https://api.zionhann.com/chillin/drawings/print", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON { response in
+        if let statusCode = response.response?.statusCode {
+            if statusCode == 200 {
+                print("Print Success: \(response)")
+                self.showPrintSuccessAlert()
+            } else {
+                print("Print Failure: \(response)")
+                self.showPrintFailureAlert()
+            }
+        } else {
+            print("Error: \(response.error ?? AFError.explicitlyCancelled)")
+            self.showPrintFailureAlert()
+        }
+        self.createDrawingView.printSuccessReturnUI(false)
+    }
+}
+
+
+```
+  </br>
