@@ -364,7 +364,7 @@ func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPat
  ```
  </br>
 
-###4. 스캔된 캐릭터에 모션을 적용하여 움직이게 만들기
+### 4. 스캔된 캐릭터에 모션을 적용하여 움직이게 만들기
  - 사용자는 스캔된 캐릭터를 선택하여 다양한 모션 효과를 적용할 수 있으며, 생성된 애니메이션은 GIF로 저장하여 간직할 수 있습니다. 캐릭터와 모션의 조합으로 창의적이고 재미있는 사용자 경험을 제공합니다.</br>
  
  <img src="https://github.com/user-attachments/assets/b9dd4030-9483-436a-99c6-3d9e8ce008cc" width="100%">
@@ -453,3 +453,116 @@ func saveGifToLibrary(data: Data) {
 }
 
 ```
+</br>
+
+### 5. 스캔된 캐릭터를 활용한 스티커 사진 촬영
+ - 스캔된 캐릭터를 사진 촬영에 활용하여 사용자 맞춤형 스티커 이미지를 생성할 수 있도록 구현되었습니다.</br>
+ - 사용자는 카메라 화면에 캐릭터 이미지를 오버레이하여 실시간 미리보기 상태에서 촬영할 수 있습니다.</br>
+ - 촬영된 이미지는 스티커가 포함된 형태로 사용자 갤러리에 저장됩니다.</br>
+ 
+<img src="https://github.com/user-attachments/assets/b9dd4030-9483-436a-99c6-3d9e8ce008cc" width="100%">
+ 
+ ### 5-1. 카메라 오버레이 설정
+  - 스캔된 캐릭터 이미지를 카메라 화면에 오버레이하여 스티커처럼 배치합니다.</br>
+  - 사용자는 드래그(이동)와 핀치 제스처(크기 조절)를 통해 스티커의 위치와 크기를 조정할 수 있습니다.</br>
+  
+``` swift
+func createOverlayView() -> UIView {
+    let overlayView = UIView(frame: view.bounds)
+    overlayView.backgroundColor = .clear
+    overlayView.isUserInteractionEnabled = true
+
+    let removeImageViewFrame = motionCheckView.convert(motionCheckView.removeImageView.frame, to: overlayView)
+    let removeImageView = UIImageView(frame: removeImageViewFrame)
+    removeImageView.image = motionCheckView.removeImageView.image
+    removeImageView.contentMode = .scaleAspectFill
+    removeImageView.isUserInteractionEnabled = true
+
+    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+    removeImageView.addGestureRecognizer(panGesture)
+
+    let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+    removeImageView.addGestureRecognizer(pinchGesture)
+
+    overlayView.addSubview(removeImageView)
+    return overlayView
+}
+
+@objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+    guard let view = gesture.view else { return }
+    let translation = gesture.translation(in: view.superview)
+    view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+    gesture.setTranslation(.zero, in: view.superview)
+}
+
+@objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+    guard let view = gesture.view else { return }
+    view.transform = view.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+    gesture.scale = 1.0
+}
+
+```
+</br>
+
+ ### 5-2. 사진 촬영 및 스티커 포함 이미지 생성
+  - 사진 촬영 시 오버레이된 스티커를 포함하여 이미지를 캡처합니다.</br>
+  - 결과 이미지는 스티커가 사진 위에 배치된 형태로 사용자 갤러리에 저장됩니다.</br>
+  
+``` swift
+@objc func shutterButtonTapped() {
+    if let imagePickerController = self.presentedViewController as? UIImagePickerController {
+        imagePickerController.takePicture()
+    }
+}
+
+func takeSnapshotWithOverlayAndSave(capturedImage: UIImage, isFrontCamera: Bool) {
+    var imageToSave = capturedImage
+    if isFrontCamera {
+        imageToSave = UIImage(cgImage: capturedImage.cgImage!, scale: capturedImage.scale, orientation: .leftMirrored)
+    }
+
+    UIGraphicsBeginImageContextWithOptions(imageToSave.size, false, imageToSave.scale)
+    imageToSave.draw(in: CGRect(origin: .zero, size: imageToSave.size))
+
+    if let overlayImage = motionCheckView.removeImageView.image {
+        overlayImage.draw(in: CGRect(x: 100, y: 100, width: 200, height: 200))
+    }
+
+    let combinedImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+    if let combinedImage = combinedImage {
+        UIImageWriteToSavedPhotosAlbum(combinedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+}
+
+@objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+    if let error = error {
+        print("Error saving image: \(error.localizedDescription)")
+    } else {
+        print("Image saved successfully")
+    }
+}
+
+```
+</br>
+ ### 5-3. 커스텀 카메라 인터페이스
+ - 기본 카메라 UI를 숨기고 **커스텀 버튼(촬영, 전환, 취소)**을 추가하여 사용자 경험을 향상시켰습니다.</br>
+ - 카메라 화면은 정사각형 비율로 조정되어 스티커 사진 촬영에 적합합니다.</br>
+ 
+ ``` swift
+ func presentCameraWithOverlay() {
+    let cameraVC = UIImagePickerController()
+    cameraVC.delegate = self
+    cameraVC.sourceType = .camera
+    cameraVC.cameraOverlayView = createOverlayView()
+    cameraVC.showsCameraControls = false
+
+    let scale = UIScreen.main.bounds.width / UIScreen.main.bounds.width
+    cameraVC.cameraViewTransform = CGAffineTransform(scaleX: scale, y: scale)
+
+    present(cameraVC, animated: true, completion: nil)
+}
+
+```
+ </br>
