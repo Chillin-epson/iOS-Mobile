@@ -170,6 +170,8 @@ func startSpeechRecognition() {
 ### 2.생성된 도안 인쇄하기(EPSON Connect API)
 칠하다 앱은 Epson Connect API를 활용하여 생성된 도안을 인쇄하는 기능을 제공합니다. 사용자는 출력물의 크기를 선택한 후, 프린터와의 통신을 통해 원하는 크기로 도안을 인쇄할 수 있습니다. 이 과정은 사용자의 선택을 기반으로 서버와 비동기로 통신하며, 안정적인 사용자 경험을 보장합니다.</br>
 
+ <img src="https://github.com/user-attachments/assets/531725e3-b311-440a-977b-8750901e9eb8" width="99%"></br>
+
  1. Epson Connect API: Epson 프린터와의 통신을 통해 인쇄를 처리</br>
  2. Alamofire: 서버와의 네트워크 통신 처리</br>
  3. UIAlertController: 사용자 확인 메시지 표시</br>
@@ -230,4 +232,134 @@ func printDrawing() {
 
 
 ```
-  </br>
+</br>
+
+### 3. 스캔한 도안을 스캔함에서 보기 쉽게 확인
+ - 칠하다 앱은 사용자가 스캔한 도안을 스캔함에서 확인할 수 있는 기능을 제공합니다. 이 기능은 서버와의 통신을 통해 사용자가 생성한 도안을 불러와 깔끔한 UI로 표시합니다. 페이지네이션을 통해 한 번에 많은 데이터를 불러오지 않고, 스크롤 시 추가 데이터를 로드하는 방식으로 효율적으로 데이터를 관리합니다.</br>
+ 
+  <img src="https://github.com/user-attachments/assets/04b5181b-2b7b-4d8f-8784-b60cc10bfb7b" width="99%"></br>
+
+ 1. Alamofire: 서버에서 스캔 데이터를 비동기로 가져오기</br>
+ 2. UICollectionView: 사용자 인터페이스에서 도안을 정렬 및 표시</br>
+ 3. Kingfisher: 서버에서 받은 이미지 URL을 빠르게 렌더링</br>
+ 4. Pagination: 데이터 요청을 효율적으로 관리하기 위해 페이지 단위로 데이터 로드</br>
+
+### 3-1. 스캔함의 도안 데이터 불러오기
+ - 스캔함에 저장된 도안을 불러오기 위해 서버에 GET 요청을 보냅니다. 요청 시, 현재 페이지 정보와 데이터를 필터링하기 위한 매개변수를 전달합니다. 데이터를 받아오는 동안 로딩 상태를 유지하며, 서버 응답에 따라 UI를 업데이트합니다.</br>
+ 
+``` swift
+func fetchDrawings(page: Int) {
+    guard !isLoading, hasMoreData else { return }
+    isLoading = true
+    
+    let url = "https://api.zionhann.com/chillin/drawings"
+    let parameters: [String: Any] = ["type": "GENERATED", "page": page]
+    
+    AF.request(url, method: .get, parameters: parameters).responseJSON { response in
+        self.isLoading = false
+        switch response.result {
+        case .success(let value):
+            if let json = value as? [String: Any], let data = json["data"] as? [[String: Any]] {
+                let newDrawings = data.compactMap { Drawing(dictionary: $0) }
+                if newDrawings.isEmpty {
+                    self.hasMoreData = false
+                } else {
+                    self.drawings.append(contentsOf: newDrawings)
+                    self.scanView.collectionView.reloadData()
+                }
+            }
+        case .failure(let error):
+            print("Error: \(error)")
+        }
+    }
+}
+
+```
+</br>
+
+### 3-2. 스캔 도안의 UI 표시
+ - 불러온 도안 데이터를 `UICollectionView`를 사용해 표시합니다. 각 도안은 `CollectionViewCell`에 이미지와 함께 깔끔하게 렌더링되며, 사용자가 스캔함의 도안을 쉽게 탐색할 수 있습니다.</br>
+ 
+```swift
+func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return drawings.count
+}
+
+func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+    let drawing = drawings[indexPath.item]
+    cell.configure(with: drawing)
+    return cell
+}
+
+```
+</br>
+
+### 3-3. 페이지네이션 구현
+ - 스크롤 위치를 감지해 추가 데이터를 요청합니다. 사용자가 스크롤을 내려 끝에 도달하면 다음 페이지 데이터를 서버에서 요청하고, 기존 데이터와 병합하여 표시합니다.</br>
+ 
+```swift
+func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let offsetY = scrollView.contentOffset.y
+    let contentHeight = scrollView.contentSize.height
+    let height = scrollView.frame.size.height
+
+    if offsetY > contentHeight - height * 2 {
+        currentPage += 1
+        fetchDrawings(page: currentPage)
+    }
+}
+
+```
+</br>
+
+### 3-4. 스캔 도안 상세보기 및 저장하기
+ - 스캔함에서 도안을 선택하면, 해당 도안의 상세 화면으로 이동합니다. 상세 화면에서는 선택한 도안을 확대하거나, 인쇄 및 저장과 같은 추가 작업을 수행할 수 있습니다.</br>
+ 
+ - **1. `Photos` Framework 활용**</br>
+ - `PHPhotoLibrary`를 사용하여 사진 라이브러리에 접근 권한을 요청하고, 저장 작업을 수행합니다.</br>
+ 
+ - **2. 권한 요청 및 이미지 저장**</br>
+ - 사용자가 권한을 허용하면, 선택한 도안 이미지를 갤러리에 저장합니다.</br>
+ - 저장 완료 후 알림 창으로 사용자에게 피드백을 제공합니다.</br>
+ 
+``` swift
+func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let drawing = drawings[indexPath.item]
+    let scanCheckVC = ScanCheckViewController()
+    scanCheckVC.drawing = drawing
+    scanCheckVC.drawingId = drawing.drawingId
+    
+    let scanCheckNaviController = UINavigationController(rootViewController: scanCheckVC)
+    scanCheckNaviController.modalPresentationStyle = .overFullScreen
+    self.present(scanCheckNaviController, animated: true, completion: nil)
+}
+
+```
+</br>
+ 
+``` swift
+@objc func saveImageButtonTapped() {
+    guard let image = scanCheckView.resultImageView.image else { return }
+    
+    PHPhotoLibrary.requestAuthorization { status in
+        if status == .authorized {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+        } else {
+            print("Authorization denied")
+        }
+    }
+}
+
+@objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+    if let error = error {
+        print("Error saving image: \(error.localizedDescription)")
+    } else {
+        print("Image saved successfully")
+        let alert = UIAlertController(title: "저장 완료", message: "이미지가 갤러리에 저장되었습니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+}
+ ```
+ </br>
