@@ -546,7 +546,8 @@ func takeSnapshotWithOverlayAndSave(capturedImage: UIImage, isFrontCamera: Bool)
 
 ```
 </br>
- ### 5-3. 커스텀 카메라 인터페이스
+
+### 5-3. 커스텀 카메라 인터페이스
  - 기본 카메라 UI를 숨기고 **커스텀 버튼(촬영, 전환, 취소)**을 추가하여 사용자 경험을 향상시켰습니다.</br>
  - 카메라 화면은 정사각형 비율로 조정되어 스티커 사진 촬영에 적합합니다.</br>
  
