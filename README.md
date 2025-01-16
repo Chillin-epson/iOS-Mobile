@@ -65,3 +65,102 @@
     
  <img src="https://github.com/user-attachments/assets/019a628a-62e5-4273-8114-55c8a9237037" width="99%"></br>
 
+1. `Speech` 프레임 워크 사용(https://developer.apple.com/documentation/speech/)</br>
+2. `speechRecognizer`: 한국어 음성 인식을 담당
+3. `recognitionRequest`: 음성 데이터를 SFSpeechRecognizer로 전달하는 요청 객체
+4. `audioEngine`: 마이크 입력 데이터를 관리
+
+ ``` swift
+let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
+var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+var recognitionTask: SFSpeechRecognitionTask?
+let audioEngine = AVAudioEngine()
+ ```
+</br>
+
+### 1-1. 음성인식 시작
+ - 사용자가 버튼을 누르면 음성 입력이 시작되며 audioEngine이 마이크 데이터를 수집</br>
+ - 인식 중간에 버튼을 다시 누르면 음성 입력 종료</br>
+ 
+``` swift
+@objc func startRecording() {
+    if audioEngine.isRunning {
+        audioEngine.stop()
+        recognitionRequest?.endAudio()
+        voiceView.recordButton.isEnabled = false
+    } else {
+        startSpeechRecognition()
+        voiceView.recordButton.setTitle("Stop", for: [])
+        showBottomSheet()
+    }
+}
+```
+ ### 1-2. 음성 데이터를 텍스트로 변환
+  - 입력 데이터: audioEngine이 마이크 데이터를 수집해 recognitionRequest로 전달</br>
+  - 텍스트 변환: 음성 데이터는 SFSpeechRecognizer로 변환되며, bestTranscription 속성에서 최적화된 텍스트를 가져옴</br>
+  - 중간결과 처리: shouldReportPartialResults를 활성화하여 실시간으로 변환된 텍스트 표시</br>
+  
+``` swift
+func startSpeechRecognition() {
+    recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+    let inputNode = audioEngine.inputNode
+
+    recognitionRequest?.shouldReportPartialResults = true
+
+    recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest!) { (result, error) in
+        if let result = result {
+            self.recognizedText = result.bestTranscription.formattedString
+            self.bottomSheetView.updateText(self.recognizedText)
+        }
+        if error != nil || result?.isFinal == true {
+            self.audioEngine.stop()
+            inputNode.removeTap(onBus: 0)
+            self.recognitionRequest = nil
+            self.recognitionTask = nil
+        }
+    }
+
+    let recordingFormat = inputNode.outputFormat(forBus: 0)
+    inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, when in
+        self.recognitionRequest?.append(buffer)
+    }
+    audioEngine.prepare()
+    try? audioEngine.start()
+}
+
+```
+ </br>
+ 
+ ### 1-3. 변환된 텍스트를 기반으로 도안 생성
+ - 변환된 테스트를 서버에 전달</br>
+ - Alamofire로 통신 네트워크 요청을 비동기로 처리하여 UI가 멈추지 않도록 설정</br>
+ - 도안 생성: 서버에서 생성된 도안의 URL과 ID를 반환</br>
+ - JSON 형식으로 변환된 데이터를 간편하게 서버로 전송</br>
+ - 생성된 도안 결과 표시: 도안을 로드하여 새로운 화면에서 사용자에게 시각화</br>
+
+```swift
+@objc func generateDrawing() {
+    let prompt = voiceView.textView.text ?? ""
+    let parameters: [String: Any] = ["prompt": prompt]
+
+    AF.request("https://api.zionhann.com/chillin/drawings/gen", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        .responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                if let json = value as? [String: Any],
+                   let drawingId = json["drawingId"] as? Int,
+                   let urlString = json["url"] as? String,
+                   let url = URL(string: urlString) {
+                    let createDrawingVC = CreateDrawingViewController()
+                    createDrawingVC.loadImage(from: url)
+                    createDrawingVC.drawingId = drawingId
+                    self.navigationController?.pushViewController(createDrawingVC, animated: true)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+}
+
+
+```
