@@ -8,7 +8,7 @@
 <img src="https://github.com/user-attachments/assets/deef0ce2-a9cf-4c02-9a60-f654711c439b" width="23%">
 <p>
 
-- [News Article - Epson Innovation Chanllenge 공식 뉴스 기사](http://www.mediagb.kr/news/view.php?idx=35219)</br>
+- [News Article - EPSON Innovation Chanllenge 공식 뉴스 기사](http://www.mediagb.kr/news/view.php?idx=35219)</br>
 
 - [한국 엡손 EPSON 공식 블로그 기사](https://blog.naver.com/epsonstory/223554685463)</br>
 
@@ -19,6 +19,8 @@
 ### 앱 설명
  - 칠하다 앱은 AI 기술을 활용하여 아이가 상상한 그림을 음성으로 입력하면 해당 도안을 생성하고, 이를 프린트하여 색칠 놀이를 즐길 수 있는 앱입니다. 색칠이 완료된 후에는 도안을 스캔하여, 색칠한 캐릭터와 함께 사진을 찍어 추억을 남길 수 있습니다.
 <img src="https://github.com/user-attachments/assets/a3e4647b-1542-44af-85cc-37e4c7e505fd" width="100%">
+
+<img src="https://github.com/user-attachments/assets/d1957bb8-5f98-40da-9e9a-c03fe2ea6fa4" width="100%">
 
 ### 성과
  - 엡손 Epson Innovation Challenge 최우수상(1위) 수상, 상금 1,000만 원</br>
@@ -43,8 +45,8 @@
 - **Design Pattern**
 `MVC`
 
-- 전체 시스템 아키텍처
- <img src="https://github.com/user-attachments/assets/ee45f724-b13b-4777-8ed1-6c282a5266a3" width="95%"></br>
+- **전체 시스템 아키텍처**
+ <img src="https://github.com/user-attachments/assets/ee45f724-b13b-4777-8ed1-6c282a5266a3" width="99%"></br>
 
 </br>
 
