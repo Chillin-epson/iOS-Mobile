@@ -56,7 +56,7 @@
 - **1.음성인식을 활용한 텍스트 추출 및 도안 생성**</br>
 - **2.생성된 도안 인쇄하기(EPSON Connect API)**</br>
 - **3.스캔한 도안을 스캔함에서 관리하고 갤러리에 저장**</br>
-- **4.스캔된 캐릭터를 모션을 적용하여 움직이게 만들기**</br>
+- **4.스캔된 캐릭터에 모션을 적용하여 움직이게 만들기**</br>
 - **5.스캔된 캐릭터를 활용한 스티커 사진 촬영**</br>
 
 
@@ -363,3 +363,93 @@ func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPat
 }
  ```
  </br>
+
+###4. 스캔된 캐릭터에 모션을 적용하여 움직이게 만들기
+ - 사용자는 스캔된 캐릭터를 선택하여 다양한 모션 효과를 적용할 수 있으며, 생성된 애니메이션은 GIF로 저장하여 간직할 수 있습니다. 캐릭터와 모션의 조합으로 창의적이고 재미있는 사용자 경험을 제공합니다.</br>
+ 
+ <img src="https://github.com/user-attachments/assets/b9dd4030-9483-436a-99c6-3d9e8ce008cc" width="100%">
+
+### 4-1. 캐릭터 선택 및 모션 타입 지정
+ - 사용자는 UICollectionView를 통해 스캔된 캐릭터를 선택합니다.</br>
+ - 이후 모션 타입 버튼(댄스, 안녕, 점프, 좀비 등) 중 하나를 선택하여 움직임을 설정합니다.</br>
+ - 선택된 모션 타입은 서버 요청 시 전달되어 애니메이션 처리에 반영됩니다.</br>
+ 
+ ``` swift
+ @objc func motionButtonTapped(_ sender: UIButton) {
+    let buttons = [motionCheckView.danceButton, motionCheckView.helloButton, motionCheckView.jumpButton, motionCheckView.zombieButton]
+    buttons.forEach { button in
+        if button == sender {
+            button.backgroundColor = .lightGray
+            switch button {
+            case motionCheckView.danceButton:
+                motionSelected = "dance"
+            case motionCheckView.helloButton:
+                motionSelected = "hello"
+            case motionCheckView.jumpButton:
+                motionSelected = "jump"
+            case motionCheckView.zombieButton:
+                motionSelected = "zombie"
+            default:
+                break
+            }
+        } else {
+            button.backgroundColor = .white
+        }
+    }
+}
+
+ ``` 
+ </br>
+ 
+### 4-2. 서버 요청을 통해 GIF 애니메이션 생성
+ - Alamofire를 사용하여 선택된 캐릭터와 모션 타입을 서버에 전달합니다.</br>
+ - 서버는 요청받은 데이터를 기반으로 GIF 파일을 생성하고, 결과 URL을 반환합니다.</br>
+ 
+``` swift
+@objc func motionStartButtonTapped() {
+    guard let drawing = drawing else { return }
+    guard let motionSelected = motionSelected else { return }
+
+    let url = "https://api.zionhann.com/chillin/motion/\(drawing.drawingId)"
+    let parameters: [String: Any] = ["motionType": motionSelected]
+
+    AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        switch response.result {
+        case .success(let value):
+            if let json = value as? [String: Any], let gifUrlString = json["url"] as? String, let gifUrl = URL(string: gifUrlString) {
+                self.presentMotionResultViewController(with: gifUrl)
+            } else {
+                self.showAlert(message: "해당 그림은 움직이게 할 수 없습니다!")
+            }
+        case .failure:
+            self.showAlert(message: "모션 적용에 실패했습니다.")
+        }
+    }
+}
+  
+```
+</br>
+
+### 4-3. GIF 결과 보기 및 저장
+ - 서버에서 반환된 GIF URL을 사용해 `Gifu` 라이브러리로 애니메이션을 UI에 표시합니다.</br>
+ - GIF 파일은 `Photos` Framework를 통해 사용자의 갤러리에 저장할 수 있습니다. 저장 후에는 알림을 통해 저장 성공 여부를 알려줍니다.</br>
+
+``` swift
+func saveGifToLibrary(data: Data) {
+    PHPhotoLibrary.requestAuthorization { status in
+        guard status == .authorized else { return }
+        PHPhotoLibrary.shared().performChanges({
+            let options = PHAssetResourceCreationOptions()
+            let creationRequest = PHAssetCreationRequest.forAsset()
+            creationRequest.addResource(with: .photo, data: data, options: options)
+        }) { success, error in
+            if success {
+                self.showSaveSuccessAlert()
+            } else {
+                self.showSaveErrorAlert(error: error)
+            }
+        }
+    }
+}
+
+```
