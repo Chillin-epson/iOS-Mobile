@@ -65,7 +65,7 @@
     
  <img src="https://github.com/user-attachments/assets/019a628a-62e5-4273-8114-55c8a9237037" width="99%"></br>
 
-1. `Speech` 프레임 워크 사용(https://developer.apple.com/documentation/speech/)</br>
+1. [`Speech` 프레임 워크 사용](https://developer.apple.com/documentation/speech/)</br>
 2. `speechRecognizer`: 한국어 음성 인식을 담당
 3. `recognitionRequest`: 음성 데이터를 SFSpeechRecognizer로 전달하는 요청 객체
 4. `audioEngine`: 마이크 입력 데이터를 관리
