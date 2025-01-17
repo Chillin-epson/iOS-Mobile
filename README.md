@@ -584,29 +584,31 @@ func takeSnapshotWithOverlayAndSave(capturedImage: UIImage, isFrontCamera: Bool)
 
 ### 6. 애플 로그인 기능 추가
  - 칠하다 앱은 Apple Sign-In 기능을 추가하여 사용자가 애플 계정을 활용해 앱에 간편하고 안전하게 로그인할 수 있도록 구현되었습니다. 이 기능은 `AuthenticationServices` 프레임워크를 활용하며, 사용자 정보를 보호하면서 원활한 인증 과정을 제공합니다.</br>
+</br>
  
-    1. 애플 로그인 버튼 제공</br>
-    - `ASAuthorizationAppleIDButton`을 활용한 직관적이고 깔끔한 UI 구성</br>
-    - 사용자에게 애플 계정을 통해 간편한 로그인 옵션 제공</br>
+1. 애플 로그인 버튼 제공</br>
+ - `ASAuthorizationAppleIDButton`을 활용한 직관적이고 깔끔한 UI 구성</br>
+ - 사용자에게 애플 계정을 통해 간편한 로그인 옵션 제공</br>
 </br>
-    2. 인증 요청 및 사용자 정보 저장</br>
-    - 사용자의 이름, 이메일, 고유 식별자를 안전하게 수집하여 UserDefaults와 서버에 저장</br>
-    - 수집된 정보는 향후 자동 로그인 및 개인화된 사용자 경험을 제공하는 데 활용</br>
+ 2. 인증 요청 및 사용자 정보 저장</br>
+ - 사용자의 이름, 이메일, 고유 식별자를 안전하게 수집하여 UserDefaults와 서버에 저장</br>
+ - 수집된 정보는 향후 자동 로그인 및 개인화된 사용자 경험을 제공하는 데 활용</br>
 </br>
-    3. 자동 로그인
-    - 이전 로그인 정보를 기반으로 앱 실행 시 자동으로 사용자 인증 수행</br>
-    - 사용자 편의성을 크게 향상</br>
+ 3. 자동 로그인
+ - 이전 로그인 정보를 기반으로 앱 실행 시 자동으로 사용자 인증 수행</br>
+ - 사용자 편의성을 크게 향상</br>
 </br>
-    4. 서버 통신 및 토큰 관리
-    - `Alamofire`를 사용해 서버와 통신하여 인증 토큰을 안전하게 처리</br>
-    - 서버로부터 받은 토큰을 기반으로 사용자 세션 관리</br>
+ 4. 서버 통신 및 토큰 관리
+ - `Alamofire`를 사용해 서버와 통신하여 인증 토큰을 안전하게 처리</br>
+ - 서버로부터 받은 토큰을 기반으로 사용자 세션 관리</br>
 </br>
-    5. 로그인 실패 처리</br>
-    - 다양한 오류 코드에 따라 사용자에게 적절한 피드백 제공.</br>
-    - 로그인 재시도 옵션과 관련 정보를 안내</br>
-    
+ 5. 로그인 실패 처리</br>
+ - 다양한 오류 코드에 따라 사용자에게 적절한 피드백 제공</br>
+ - 로그인 재시도 옵션과 관련 정보를 안내</br>
+ </br>
+</br>
 
-1. 애플 인증 요청 사용자가 로그인 버튼을 누르면 ASAuthorizationController를 통해 애플 인증 요청을 수행합니다.</br>
+1. 애플 인증 요청 사용자가 로그인 버튼을 누르면 ASAuthorizationController를 통해 애플 인증 요청을 수행</br>
 
  ``` swift
 @objc func appleLoginButtonTapped() {
@@ -624,7 +626,7 @@ func takeSnapshotWithOverlayAndSave(capturedImage: UIImage, isFrontCamera: Bool)
 ```
 </br>
 
-2. 인증 성공 시 사용자 정보 처리 애플 계정 인증이 성공적으로 완료되면, 사용자의 이름, 이메일, 고유 식별자를 처리합니다. 이 정보는 서버와의 통신에 사용되며, UserDefaults에 저장됩니다.</br>
+2. 인증 성공 시 사용자 정보 처리 애플 계정 인증이 성공적으로 완료되면, 사용자의 이름, 이메일, 고유 식별자를 처리합니다. 이 정보는 서버와의 통신에 사용되며, UserDefaults에 저장</br>
 
  ``` swift
 func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
@@ -653,7 +655,7 @@ func authorizationController(controller: ASAuthorizationController, didCompleteW
 ```
 </br>
 
-3. 인증 실패 처리 인증 과정 중 실패 시, 사용자에게 에러 메시지를 제공하고 적절한 대처 방법을 안내합니다.</br>
+3. 인증 실패 처리 인증 과정 중 실패 시, 사용자에게 에러 메시지를 제공하고 적절한 대처 방법을 안내</br>
 
  ``` swift
 func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
