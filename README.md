@@ -28,14 +28,14 @@
 ### 성과
  - 엡손 Epson Innovation Challenge 최우수상(1위) 수상, 상금 1,000만 원</br>
  - 국내 최초 개최 및 세계 3번째로 열린 글로벌 대회에서 우승
- - 엡손 본사 일본 그룹 COO, 현) 세이코 엡손(Seiko Epson Corporation) 프린팅 솔루션 사업부 최고운영책임자(COO) Yoshida Junkichi로부터 명함을 받고 글로벌 앱 출시를 위한 상부 회의 진행</br>
- - 한국엡손(주) CEO, 현) 한국엡손㈜ 대표이사 Fujii Shigeo와 네트워킹</br>
-  - 엡손 Epson과 파트너쉽 체결, 글로벌 앱 런칭 진행중</br>
+ - 일본 본사 세이코 엡손(Seiko EPSON Corporation) 최고운영책임자(COO) Yoshida Junkichi로부터 명함을 받고 글로벌 앱 출시를 위한 상부 회의 진행</br>
+ - 한국엡손 대표이사(CEO) Fujii Shigeo와 네트워킹</br>
+  - 엡손 EPSON과 파트너쉽 체결, 글로벌 앱 런칭 진행중</br>
  
  </br>
  
- <img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5" width="90%"></br>
-    한국엡손(주) 대표이사 후지이 시게오(CEO)
+ <img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5" width="100%"></br>
+     한국엡손 대표이사(CEO) 후지이 시게오
     
 </br>
  
