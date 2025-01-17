@@ -14,6 +14,8 @@
 
 - [실제 글로벌 기업 EPSON 홍보에 쓰인 유튜브 영상 링크](https://youtu.be/ldD-e7rh5Lo)</br>
 
+- [글로벌 기업 EPSON 대회 모집 공고](https://likelion.net/event/epson)</br>
+
 </br>
 
 
