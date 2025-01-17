@@ -32,8 +32,12 @@
  - 엡손 본사 일본 그룹 COO, 현) 세이코 엡손(Seiko Epson Corporation) 프린팅 솔루션 사업부 최고운영책임자(COO) Yoshida Junkichi로부터 명함을 받고 글로벌 앱 출시를 위한 상부 회의 진행</br>
  - 한국엡손(주) CEO, 현) 한국엡손㈜ 대표이사 Fujii Shigeo와 네트워킹</br>
  
+ </br>
+ 
  <img src="https://github.com/user-attachments/assets/582d07ce-41ed-4ea7-888f-feac27aa24e5" width="90%"></br>
     한국엡손(주) 대표이사 후지이 시게오(CEO)
+    
+</br>
  
 ### 프로젝트 기간
 - 2024.06.01 ~ 2024.6.29 (4주) </br>
