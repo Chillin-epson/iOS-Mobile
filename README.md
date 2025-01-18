@@ -54,7 +54,7 @@
 
 ## 기술 스택
 - **Framework**
-`UIKit`, `Speech`, `Alamofire`, `Kingfisher`, `SnapKit`, `Photos`, `AVFoundation`, `Gifu`, `Lottie`
+`UIKit`, `Speech`, `Alamofire`, `Kingfisher`, `SnapKit`, `Photos`, `AVFoundation`, `Gifu`, `Lottie`, `AuthenticationServices`
 
 - **Design Pattern**
 `MVC`
